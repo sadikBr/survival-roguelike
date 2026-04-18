@@ -4,7 +4,7 @@ namespace Game.Entities;
 
 public partial class BasicEnemy : CharacterBody2D
 {
-    private const float MaxSpeed = 75.0f;
+    private const float MaxSpeed = 40.0f;
 
     private Area2D _hitbox;
 

@@ -16,8 +16,7 @@ public partial class GameCamera : Camera2D
     public override void _Process(double delta)
     {
         AquireTarget();
-        // This is not necessary because we have the position smoothing in the Camera2D node??
-        // GlobalPosition = GlobalPosition.Lerp(_targetPosition, 1.0f - Mathf.Exp((float)delta * -10));
+        // GlobalPosition = GlobalPosition.Lerp(_targetPosition, 1.0f - Mathf.Exp((float)delta * -20));
         GlobalPosition = _targetPosition;
     }
 

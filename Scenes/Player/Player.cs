@@ -9,7 +9,8 @@ public partial class Player : CharacterBody2D
     private static readonly StringName ActionMoveUp = new("move_up");
     private static readonly StringName ActionMoveDown = new("move_down");
 
-    private const float MaxSpeed = 200.0f;
+    private const float MaxSpeed = 125.0f;
+    private const float Acceleration = 25.0f;
 
     public override void _Ready()
     {
@@ -18,9 +19,9 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
         var direction = Input.GetVector(ActionMoveLeft, ActionMoveRight, ActionMoveUp, ActionMoveDown);
-        var velocity = direction * MaxSpeed;
+        var targetVelocity = direction * MaxSpeed;
 
-        Velocity = velocity;
+        Velocity = Velocity.Lerp(targetVelocity, 1 - Mathf.Exp((float)delta * -Acceleration));
         MoveAndSlide();
     }
 }

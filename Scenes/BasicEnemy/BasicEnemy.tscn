@@ -10,7 +10,9 @@ radius = 12.0
 radius = 5.0
 
 [node name="BasicEnemy" type="CharacterBody2D" unique_id=181386295 groups=["Enemy"]]
-collision_layer = 0
+collision_layer = 8
+collision_mask = 9
+motion_mode = 1
 script = ExtResource("1_xkemt")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1853633825]
