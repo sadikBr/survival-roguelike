@@ -1,8 +1,8 @@
-using Game.Entities;
+using Game.GameObjects.Entities;
 
 using Godot;
 
-namespace Game.Camera;
+namespace Game.GameObjects.Camera;
 
 public partial class GameCamera : Camera2D
 {

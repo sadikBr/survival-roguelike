@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbee0n4mlsp6n"
-path="res://.godot/imported/basic_enemy.png-2fe4f99235b1359a013b30ab28545e5d.ctex"
+uid="uid://ctwvxui0mr3rg"
+path="res://.godot/imported/experience_vial.png-d00f1e156c91a42cf897f8cf091262d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/BasicEnemy/basic_enemy.png"
-dest_files=["res://.godot/imported/basic_enemy.png-2fe4f99235b1359a013b30ab28545e5d.ctex"]
+source_file="res://Scenes/GameObjects/Pickups/ExperienceVial/experience_vial.png"
+dest_files=["res://.godot/imported/experience_vial.png-d00f1e156c91a42cf897f8cf091262d8.ctex"]
 
 [params]
 

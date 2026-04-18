@@ -1,4 +1,4 @@
-using Game.Entities;
+using Game.GameObjects.Entities;
 
 using Godot;
 

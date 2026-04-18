@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Entities;
+namespace Game.GameObjects.Entities;
 
 public partial class Player : CharacterBody2D
 {
