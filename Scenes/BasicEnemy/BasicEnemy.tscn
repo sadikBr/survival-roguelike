@@ -3,12 +3,23 @@
 [ext_resource type="Texture2D" uid="uid://dbee0n4mlsp6n" path="res://Scenes/BasicEnemy/basic_enemy.png" id="1_ku2ob"]
 [ext_resource type="Script" uid="uid://c02hxsbnlk8yx" path="res://Scenes/BasicEnemy/BasicEnemy.cs" id="1_xkemt"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xkemt"]
+radius = 12.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku2ob"]
 radius = 5.0
 
-[node name="BasicEnemy" type="CharacterBody2D" unique_id=181386295]
+[node name="BasicEnemy" type="CharacterBody2D" unique_id=181386295 groups=["Enemy"]]
 collision_layer = 0
 script = ExtResource("1_xkemt")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1853633825]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=175077165]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_xkemt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=495142041]
 texture = ExtResource("1_ku2ob")
