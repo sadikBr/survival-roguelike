@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Game.Entities;
+
 public partial class Player : CharacterBody2D
 {
     private static readonly StringName ActionMoveLeft = new("move_left");
