@@ -2,6 +2,8 @@ using Game.Entities;
 
 using Godot;
 
+namespace Game.Managers;
+
 public partial class EnemyManager : Node
 {
     [Export]
