@@ -29,14 +29,40 @@ public partial class EnemyManager : Node
         _timer.Start();
         if (GetTree().GetFirstNodeInGroup(nameof(Player)) is not Player player) return;
 
-        var randomDirection = Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau));
-        var spawnPosition = player.GlobalPosition + randomDirection * SpawnRadius;
-
         var enemy = _basicEnemy.Instantiate<Node2D>();
 
         var entitiesLayer = GetTree().GetFirstNodeInGroup("EntitiesLayer");
         entitiesLayer.AddChild(enemy);
-        enemy.GlobalPosition = spawnPosition;
+        enemy.GlobalPosition = GetSpawnPosition();
+    }
+
+    private Vector2 GetSpawnPosition()
+    {
+        if (GetTree().GetFirstNodeInGroup(nameof(Player)) is not Player player) return Vector2.Zero;
+
+        var spawnPosition = Vector2.Zero;
+        var randomDirection = Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau));
+
+        for (int i = 0; i < 4; i++)
+        {
+            spawnPosition = player.GlobalPosition + randomDirection * SpawnRadius;
+
+            var queryParams = new PhysicsRayQueryParameters2D()
+            {
+                From = player.GlobalPosition,
+                To = spawnPosition,
+                CollisionMask = 1
+            };
+            var result = GetTree().Root.World2D.DirectSpaceState.IntersectRay(queryParams);
+
+            if (result.Count == 0) break;
+            else
+            {
+                randomDirection = randomDirection.Rotated(Mathf.DegToRad(90));
+            }
+        }
+
+        return spawnPosition;
     }
 
     private void OnArenaDifficultyIncreased(int arenaDifficulty)
