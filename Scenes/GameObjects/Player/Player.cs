@@ -46,6 +46,11 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
     }
 
+    public HealthComponent GetHealthComponent()
+    {
+        return _healthComponent;
+    }
+
     public void CheckDealDamage()
     {
         if (_numberOfCollidingBodies == 0 || !_damageIntervalTimer.IsStopped()) return;
