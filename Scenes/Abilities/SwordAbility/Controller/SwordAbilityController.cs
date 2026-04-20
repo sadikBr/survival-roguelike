@@ -1,8 +1,13 @@
+using System;
 using System.Linq;
 
+using Game.Autoloads;
 using Game.GameObjects.Entities;
+using Game.Managers;
+using Game.Resources.Upgrades;
 
 using Godot;
+using Godot.Collections;
 
 namespace Game.Abilities.Controllers;
 
@@ -13,6 +18,7 @@ public partial class SwordAbilityController : Node
 
     private const float MaxRange = 150.0f;
     private int _damage = 5;
+    private float _baseWaitTime;
 
     private Timer _timer;
 
@@ -20,6 +26,9 @@ public partial class SwordAbilityController : Node
     {
         _timer = GetNode<Timer>("Timer");
         _timer.Timeout += OnTimerTimeout;
+        _baseWaitTime = (float)_timer.WaitTime;
+
+        GameEvents.Instance.AbilityUpgradeAdded += OnAbilityUpgradeAdded;
     }
 
     private void OnTimerTimeout()
@@ -43,7 +52,8 @@ public partial class SwordAbilityController : Node
         var target = filteredEnemies[0] as Node2D;
 
         var instance = _swordAbility.Instantiate<SwordAbility>();
-        player.GetParent().AddChild(instance);
+        var foregroundLayer = GetTree().GetFirstNodeInGroup("ForegroundLayer");
+        foregroundLayer.AddChild(instance);
         instance.SetDamage(_damage);
 
         instance.GlobalPosition = target.GlobalPosition;
@@ -52,4 +62,14 @@ public partial class SwordAbilityController : Node
         var enemyDirection = target.GlobalPosition.DirectionTo(instance.GlobalPosition);
         instance.Rotation = enemyDirection.Angle();
     }
+
+    private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
+    {
+        if (upgrade.Id != "sword_rate") return;
+
+        var percentReduction = currentUpgrades[upgrade.Id].Quantity * 0.1f;
+        _timer.WaitTime = _baseWaitTime * (1.0f - percentReduction);
+        _timer.Start();
+    }
+
 }

@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-
+using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
 
 using Godot;
+using Godot.Collections;
 
 namespace Game.Managers;
 
@@ -14,8 +14,7 @@ public partial class UpgradeManager : Node
     [Export] private ExperienceManager _experienceManager;
     [Export] private PackedScene _upgradeScreenScene;
 
-    private readonly Dictionary<string, UpgradeState> _currentUpgrades = [];
-    private struct UpgradeState
+    public partial class UpgradeState : Resource
     {
         public AbilityUpgrade Resource { get; set; }
         public int Quantity { get; set; }
@@ -25,6 +24,7 @@ public partial class UpgradeManager : Node
             Quantity += amount;
         }
     }
+    private readonly Dictionary<string, UpgradeState> _currentUpgrades = [];
 
     public override void _Ready()
     {
@@ -57,6 +57,8 @@ public partial class UpgradeManager : Node
             data.UpdateQuantity(1);
             _currentUpgrades[upgrade.Id] = data;
         }
+
+        GameEvents.Instance.EmitAbilityUpgradeAdded(upgrade, _currentUpgrades);
     }
 
     private void OnUpgradeSelected(AbilityUpgrade upgrade)

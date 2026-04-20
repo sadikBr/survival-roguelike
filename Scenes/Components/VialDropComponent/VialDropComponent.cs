@@ -25,7 +25,8 @@ public partial class VialDropComponent : Node
         var spawnPosition = owner.GlobalPosition;
         var instance = _vialScene.Instantiate<Node2D>();
 
-        owner.GetParent().AddChild(instance);
+        var entitiesLayer = GetTree().GetFirstNodeInGroup("EntitiesLayer");
+        entitiesLayer.AddChild(instance);
         instance.GlobalPosition = spawnPosition;
     }
 }
