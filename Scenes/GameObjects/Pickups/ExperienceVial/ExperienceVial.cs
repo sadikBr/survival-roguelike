@@ -1,3 +1,5 @@
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.GameObjects.Pickups;
@@ -14,6 +16,7 @@ public partial class ExperienceVial : Node2D
 
     private void OnAreaEntered(Area2D area)
     {
+        GameEvents.Instance.EmitExperienceVialCollected(1);
         QueueFree();
     }
 }
