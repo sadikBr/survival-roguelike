@@ -1,3 +1,5 @@
+using Game.Components;
+
 using Godot;
 
 namespace Game.GameObjects.Entities;
@@ -12,8 +14,27 @@ public partial class Player : CharacterBody2D
     private const float MaxSpeed = 125.0f;
     private const float Acceleration = 25.0f;
 
+    private int _numberOfCollidingBodies;
+
+    private Area2D _collisionArea;
+    private HealthComponent _healthComponent;
+    private Timer _damageIntervalTimer;
+    private ProgressBar _healthBar;
+
     public override void _Ready()
     {
+        _collisionArea = GetNode<Area2D>("CollisionArea");
+        _healthComponent = GetNode<HealthComponent>("HealthComponent");
+        _damageIntervalTimer = GetNode<Timer>("DamageIntervalTimer");
+        _healthBar = GetNode<ProgressBar>("HealthBar");
+
+        _collisionArea.BodyEntered += OnBodyEntered;
+        _collisionArea.BodyExited += OnBodyExited;
+
+        _healthComponent.HealthChanged += OnHealthChanged;
+        UpdateHealthDisplay();
+
+        _damageIntervalTimer.Timeout += OnDamageIntervalTimerTimeout;
     }
 
     public override void _Process(double delta)
@@ -24,4 +45,39 @@ public partial class Player : CharacterBody2D
         Velocity = Velocity.Lerp(targetVelocity, 1 - Mathf.Exp((float)delta * -Acceleration));
         MoveAndSlide();
     }
+
+    public void CheckDealDamage()
+    {
+        if (_numberOfCollidingBodies == 0 || !_damageIntervalTimer.IsStopped()) return;
+
+        _healthComponent.Damage(1);
+        _damageIntervalTimer.Start();
+    }
+
+    private void UpdateHealthDisplay()
+    {
+        _healthBar.Value = _healthComponent.GetHealthPercentage();
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        _numberOfCollidingBodies += 1;
+        CheckDealDamage();
+    }
+
+    private void OnBodyExited(Node2D body)
+    {
+        _numberOfCollidingBodies -= 1;
+    }
+
+    private void OnDamageIntervalTimerTimeout()
+    {
+        CheckDealDamage();
+    }
+
+    private void OnHealthChanged(bool isDamage)
+    {
+        UpdateHealthDisplay();
+    }
+
 }
