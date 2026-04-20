@@ -9,7 +9,13 @@ namespace Game.Managers;
 public partial class ExperienceManager : Node
 {
 
+    [Signal] public delegate void ExperienceUpdatedEventHandler(int currentExp, int targetExp);
+
+    private const int TargetExperienceIncrement = 5;
+
     public int CurrentExperience { get; private set; }
+    public int TargetExperience { get; private set; } = 5;
+    public int CurrentLevel { get; private set; } = 1;
 
     public override void _Ready()
     {
@@ -18,7 +24,16 @@ public partial class ExperienceManager : Node
 
     public void IncrementExperience(int amount)
     {
-        CurrentExperience += amount;
+        CurrentExperience = Mathf.Clamp(CurrentExperience + amount, 0, TargetExperience);
+        EmitSignal(SignalName.ExperienceUpdated, CurrentExperience, TargetExperience);
+
+        if (CurrentExperience == TargetExperience)
+        {
+            CurrentLevel += 1;
+            TargetExperience += TargetExperienceIncrement;
+            CurrentExperience = 0;
+            EmitSignal(SignalName.ExperienceUpdated, CurrentExperience, TargetExperience);
+        }
     }
 
     private void OnExperienceVialCollected(int amount)
