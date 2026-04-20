@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Game.Resources.Upgrades;
+using Game.UI;
 
 using Godot;
 
@@ -11,6 +12,7 @@ public partial class UpgradeManager : Node
 
     [Export] private AbilityUpgrade[] _upgradePool = [];
     [Export] private ExperienceManager _experienceManager;
+    [Export] private PackedScene _upgradeScreenScene;
 
     private readonly Dictionary<string, UpgradeState> _currentUpgrades = [];
     private struct UpgradeState
@@ -34,19 +36,32 @@ public partial class UpgradeManager : Node
         var chosenUpgrade = _upgradePool[GD.Randi() % _upgradePool.Length];
         if (chosenUpgrade == null) return;
 
-        if (!_currentUpgrades.TryGetValue(chosenUpgrade.Id, out var data))
+        var upgradeScreenInstance = _upgradeScreenScene.Instantiate<UpgradeScreen>();
+        AddChild(upgradeScreenInstance);
+        upgradeScreenInstance.SetAbilityUpgrades([chosenUpgrade]);
+        upgradeScreenInstance.UpgradeSelected += OnUpgradeSelected;
+    }
+
+    private void ApplyUpgrade(AbilityUpgrade upgrade)
+    {
+        if (!_currentUpgrades.TryGetValue(upgrade.Id, out var data))
         {
-            _currentUpgrades.Add(chosenUpgrade.Id, new UpgradeState()
+            _currentUpgrades.Add(upgrade.Id, new UpgradeState()
             {
-                Resource = chosenUpgrade,
+                Resource = upgrade,
                 Quantity = 1
             });
         }
         else
         {
             data.UpdateQuantity(1);
-            _currentUpgrades[chosenUpgrade.Id] = data;
+            _currentUpgrades[upgrade.Id] = data;
         }
+    }
+
+    private void OnUpgradeSelected(AbilityUpgrade upgrade)
+    {
+        ApplyUpgrade(upgrade);
     }
 
 }
