@@ -24,7 +24,8 @@ _experienceManager = NodePath("../ExperienceManager")
 
 [node name="ArenaTimeManager" parent="." unique_id=873102863 instance=ExtResource("2_w20t6")]
 
-[node name="EnemyManager" parent="." unique_id=730869000 instance=ExtResource("1_o8wgc")]
+[node name="EnemyManager" parent="." unique_id=730869000 node_paths=PackedStringArray("_arenaTimeManager") instance=ExtResource("1_o8wgc")]
+_arenaTimeManager = NodePath("../ArenaTimeManager")
 
 [node name="ExperienceManager" parent="." unique_id=889025972 instance=ExtResource("4_aw1lf")]
 

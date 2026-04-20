@@ -7,7 +7,12 @@ namespace Game.Managers;
 public partial class ArenaTimeManager : Node
 {
 
+    [Signal] public delegate void ArenaDifficultyIncreasedEventHandler(int arenaDifficulty);
+
     [Export] private PackedScene _endScreenScene;
+
+    private const int DifficultyInterval = 5;
+    private int _arenaDifficulty;
 
     private Timer _timer;
 
@@ -15,6 +20,16 @@ public partial class ArenaTimeManager : Node
     {
         _timer = GetNode<Timer>("Timer");
         _timer.Timeout += OnTimerTimeout;
+    }
+
+    public override void _Process(double delta)
+    {
+        var nextTimeTarget = _timer.WaitTime - (_arenaDifficulty + 1) * DifficultyInterval;
+        if (_timer.TimeLeft <= nextTimeTarget)
+        {
+            _arenaDifficulty += 1;
+            EmitSignal(SignalName.ArenaDifficultyIncreased, _arenaDifficulty);
+        }
     }
 
     public float GetTimeElapsed()
