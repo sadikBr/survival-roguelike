@@ -10,11 +10,12 @@ public partial class ExperienceManager : Node
 {
 
     [Signal] public delegate void ExperienceUpdatedEventHandler(int currentExp, int targetExp);
+    [Signal] public delegate void LevelUpEventHandler(int newLevel);
 
     private const int TargetExperienceIncrement = 5;
 
     public int CurrentExperience { get; private set; }
-    public int TargetExperience { get; private set; } = 5;
+    public int TargetExperience { get; private set; } = 1;
     public int CurrentLevel { get; private set; } = 1;
 
     public override void _Ready()
@@ -33,6 +34,7 @@ public partial class ExperienceManager : Node
             TargetExperience += TargetExperienceIncrement;
             CurrentExperience = 0;
             EmitSignal(SignalName.ExperienceUpdated, CurrentExperience, TargetExperience);
+            EmitSignal(SignalName.LevelUp, CurrentLevel);
         }
     }
 
