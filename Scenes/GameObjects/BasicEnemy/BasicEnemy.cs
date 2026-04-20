@@ -8,14 +8,10 @@ public partial class BasicEnemy : CharacterBody2D
 {
     private const float MaxSpeed = 40.0f;
 
-    private Area2D _hitbox;
     private HealthComponent _healthComponent;
 
     public override void _Ready()
     {
-        _hitbox = GetNode<Area2D>("Hitbox");
-        _hitbox.AreaEntered += OnAreaEntered;
-
         _healthComponent = GetNode<HealthComponent>("HealthComponent");
     }
 
@@ -34,8 +30,4 @@ public partial class BasicEnemy : CharacterBody2D
             : GlobalPosition.DirectionTo(player.GlobalPosition);
     }
 
-    private void OnAreaEntered(Area2D other)
-    {
-        _healthComponent.Damage(100);
-    }
 }

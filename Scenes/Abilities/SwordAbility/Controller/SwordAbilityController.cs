@@ -12,6 +12,8 @@ public partial class SwordAbilityController : Node
     private PackedScene _swordAbility;
 
     private const float MaxRange = 150.0f;
+    private int _damage = 5;
+
     private Timer _timer;
 
     public override void _Ready()
@@ -40,8 +42,9 @@ public partial class SwordAbilityController : Node
         });
         var target = filteredEnemies[0] as Node2D;
 
-        var instance = _swordAbility.Instantiate<Node2D>();
+        var instance = _swordAbility.Instantiate<SwordAbility>();
         player.GetParent().AddChild(instance);
+        instance.SetDamage(_damage);
 
         instance.GlobalPosition = target.GlobalPosition;
         instance.GlobalPosition += Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau)) * 4.0f;
