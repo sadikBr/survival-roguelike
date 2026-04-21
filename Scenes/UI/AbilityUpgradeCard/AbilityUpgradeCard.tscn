@@ -11,8 +11,10 @@ layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer" unique_id=617300649]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Upgrade Name"
+autowrap_mode = 2
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer" unique_id=936927506]
 unique_name_in_owner = true
