@@ -46,6 +46,8 @@ public partial class UpgradeManager : Node
 
     private AbilityUpgrade[] PickUpgrades()
     {
+        if (_upgradePool.Length < _numberOfUpgradesToPick) return _upgradePool;
+
         var chosenUpgrades = new AbilityUpgrade[_numberOfUpgradesToPick];
         var filteredUpgrades = (AbilityUpgrade[])_upgradePool.Clone();
         for (int i = 0; i < chosenUpgrades.Length; i++)
@@ -73,6 +75,15 @@ public partial class UpgradeManager : Node
         {
             data.UpdateQuantity(1);
             _currentUpgrades[upgrade.Id] = data;
+        }
+
+        if (upgrade.MaxQuantity > 0)
+        {
+            var currentQuantity = _currentUpgrades[upgrade.Id].Quantity;
+            if (currentQuantity == upgrade.MaxQuantity)
+            {
+                _upgradePool = [.. _upgradePool.Where(u => u.Id != upgrade.Id)];
+            }
         }
 
         GameEvents.Instance.EmitAbilityUpgradeAdded(upgrade, _currentUpgrades);

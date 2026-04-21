@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_f6wjs")
 Id = "sword_rate"
+MaxQuantity = 5
 Name = "Sword Quickness"
 Description = "Increases sword attack rate by 10%"
 metadata/_custom_type_script = "uid://dka08wm1xbyqg"
