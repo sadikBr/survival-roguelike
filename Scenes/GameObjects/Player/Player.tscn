@@ -5,6 +5,93 @@
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_ev3h2"]
 [ext_resource type="PackedScene" uid="uid://c8xr05xvgcln3" path="res://Scenes/Abilities/SwordAbility/Controller/SwordAbilityController.tscn" id="2_h54ih"]
 
+[sub_resource type="Animation" id="Animation_tgacc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ev3h2"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.2617993877991494, 0.2617993877991494, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Sprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(2.462289, 2.6390157, 2.9281707, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.1), Vector2(1.5, 0.7), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgacc"]
+_data = {
+&"RESET": SubResource("Animation_tgacc"),
+&"walk": SubResource("Animation_ev3h2")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev3h2"]
 bg_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
 
@@ -30,6 +117,9 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_ft8w5")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1702654000]
+libraries/ = SubResource("AnimationLibrary_tgacc")
+
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_ev3h2")]
 
 [node name="Abilities" type="Node" parent="." unique_id=1141242091]
@@ -54,6 +144,7 @@ value = 0.5
 show_percentage = false
 
 [node name="PickupArea" type="Area2D" parent="." unique_id=48065246]
+visible = false
 collision_layer = 16
 collision_mask = 0
 
@@ -62,6 +153,7 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_qjued")
 
 [node name="CollisionArea" type="Area2D" parent="." unique_id=527809294]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -69,10 +161,13 @@ collision_mask = 8
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_ev3h2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1159748869]
-texture = ExtResource("1_s0eop")
-offset = Vector2(0, -8)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1846727143]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_s0eop")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=151312428]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1159748869]
+texture = ExtResource("1_s0eop")
+offset = Vector2(0, -8)

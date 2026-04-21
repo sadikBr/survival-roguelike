@@ -17,11 +17,16 @@ public partial class Player : CharacterBody2D
     private static readonly StringName ActionMoveUp = new("move_up");
     private static readonly StringName ActionMoveDown = new("move_down");
 
+    private static readonly StringName AnimationPlayerWalk = new("walk");
+    private static readonly StringName AnimationPlayerReset = new("RESET");
+
     private const float MaxSpeed = 125.0f;
     private const float Acceleration = 25.0f;
 
     private int _numberOfCollidingBodies;
 
+    private AnimationPlayer _animationPlayer;
+    private Node2D _visuals;
     private Area2D _collisionArea;
     private HealthComponent _healthComponent;
     private Timer _damageIntervalTimer;
@@ -30,6 +35,9 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _visuals = GetNode<Node2D>("Visuals");
+
         _collisionArea = GetNode<Area2D>("CollisionArea");
         _collisionArea.BodyEntered += OnBodyEntered;
         _collisionArea.BodyExited += OnBodyExited;
@@ -54,6 +62,17 @@ public partial class Player : CharacterBody2D
 
         Velocity = Velocity.Lerp(targetVelocity, 1 - Mathf.Exp((float)delta * -Acceleration));
         MoveAndSlide();
+
+        if (direction.Length() > 0)
+        {
+            _animationPlayer.Play(AnimationPlayerWalk);
+        }
+        else
+        {
+            _animationPlayer.Play(AnimationPlayerReset);
+        }
+        var moveSign = Mathf.Sign(direction.X);
+        _visuals.Scale = moveSign == 0 ? Vector2.One : new Vector2(moveSign, 1);
     }
 
     public HealthComponent GetHealthComponent()
