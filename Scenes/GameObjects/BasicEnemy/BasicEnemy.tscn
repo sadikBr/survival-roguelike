@@ -58,10 +58,10 @@ tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.05, 0.2, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.17453292519943295, -0.17453292519943295, 0.17453292519943295, -0.17453292519943295]
+"values": [0.17453292519943295, -0.17453292519943295, 0.17453292519943295]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ifawa"]
@@ -89,7 +89,6 @@ autoplay = &"walk"
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_3v5yd")]
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_masdr")]
-_dropPercent = 1.0
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="DeathComponent" parent="." unique_id=1643870301 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("4_ifawa")]
