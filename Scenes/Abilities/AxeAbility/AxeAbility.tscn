@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cl2nvo8xg5414"]
+
+[ext_resource type="Script" uid="uid://dgtrqqqkqvjk3" path="res://Scenes/Abilities/AxeAbility/AxeAbility.cs" id="1_4w2go"]
+[ext_resource type="Texture2D" uid="uid://rfp3n64gsuqs" path="res://Scenes/Abilities/AxeAbility/axe.png" id="1_k3vov"]
+[ext_resource type="PackedScene" uid="uid://dynd2wmjrwqeu" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="3_e8m6q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7jnmo"]
+
+[sub_resource type="Animation" id="Animation_7jnmo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e8m6q"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jnmo"]
+_data = {
+&"RESET": SubResource("Animation_7jnmo"),
+&"default": SubResource("Animation_e8m6q")
+}
+
+[node name="AxeAbility" type="Node2D" unique_id=687160848]
+script = ExtResource("1_4w2go")
+
+[node name="HitboxComponent" parent="." unique_id=366257644 instance=ExtResource("3_e8m6q")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=200100536]
+shape = SubResource("CircleShape2D_7jnmo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1522194569]
+libraries/ = SubResource("AnimationLibrary_7jnmo")
+autoplay = &"default"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1190822054]
+texture = ExtResource("1_k3vov")
