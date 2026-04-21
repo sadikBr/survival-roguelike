@@ -1,6 +1,12 @@
+using System;
+
+using Game.Autoloads;
 using Game.Components;
+using Game.Managers;
+using Game.Resources.Upgrades;
 
 using Godot;
+using Godot.Collections;
 
 namespace Game.GameObjects.Entities;
 
@@ -20,21 +26,25 @@ public partial class Player : CharacterBody2D
     private HealthComponent _healthComponent;
     private Timer _damageIntervalTimer;
     private ProgressBar _healthBar;
+    private Node _abilities;
 
     public override void _Ready()
     {
         _collisionArea = GetNode<Area2D>("CollisionArea");
-        _healthComponent = GetNode<HealthComponent>("HealthComponent");
-        _damageIntervalTimer = GetNode<Timer>("DamageIntervalTimer");
-        _healthBar = GetNode<ProgressBar>("HealthBar");
-
         _collisionArea.BodyEntered += OnBodyEntered;
         _collisionArea.BodyExited += OnBodyExited;
 
+        _healthComponent = GetNode<HealthComponent>("HealthComponent");
         _healthComponent.HealthChanged += OnHealthChanged;
+
+        _damageIntervalTimer = GetNode<Timer>("DamageIntervalTimer");
+        _damageIntervalTimer.Timeout += OnDamageIntervalTimerTimeout;
+
+        _healthBar = GetNode<ProgressBar>("HealthBar");
         UpdateHealthDisplay();
 
-        _damageIntervalTimer.Timeout += OnDamageIntervalTimerTimeout;
+        _abilities = GetNode<Node>("Abilities");
+        GameEvents.Instance.AbilityUpgradeAdded += OnAbilityUpgradeAdded;
     }
 
     public override void _Process(double delta)
@@ -83,6 +93,14 @@ public partial class Player : CharacterBody2D
     private void OnHealthChanged(bool isDamage)
     {
         UpdateHealthDisplay();
+    }
+
+    private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
+    {
+        if (upgrade is not Ability newAbility) return;
+
+        var abilityInstance = newAbility.AbilityControllerScene.Instantiate();
+        _abilities.AddChild(abilityInstance);
     }
 
 }

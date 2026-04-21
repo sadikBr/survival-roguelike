@@ -1,3 +1,5 @@
+using System.Linq;
+
 using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
@@ -13,6 +15,7 @@ public partial class UpgradeManager : Node
     [Export] private AbilityUpgrade[] _upgradePool = [];
     [Export] private ExperienceManager _experienceManager;
     [Export] private PackedScene _upgradeScreenScene;
+    [Export] private int _numberOfUpgradesToPick = 2;
 
     public partial class UpgradeState : Resource
     {
@@ -33,13 +36,27 @@ public partial class UpgradeManager : Node
 
     private void OnLevelUp(int newLevel)
     {
-        var chosenUpgrade = _upgradePool[GD.Randi() % _upgradePool.Length];
-        if (chosenUpgrade == null) return;
+        var chosenUpgrades = PickUpgrades();
 
         var upgradeScreenInstance = _upgradeScreenScene.Instantiate<UpgradeScreen>();
         AddChild(upgradeScreenInstance);
-        upgradeScreenInstance.SetAbilityUpgrades([chosenUpgrade]);
+        upgradeScreenInstance.SetAbilityUpgrades(chosenUpgrades);
         upgradeScreenInstance.UpgradeSelected += OnUpgradeSelected;
+    }
+
+    private AbilityUpgrade[] PickUpgrades()
+    {
+        var chosenUpgrades = new AbilityUpgrade[_numberOfUpgradesToPick];
+        var filteredUpgrades = (AbilityUpgrade[])_upgradePool.Clone();
+        for (int i = 0; i < chosenUpgrades.Length; i++)
+        {
+            var chosenUpgrade = filteredUpgrades[GD.Randi() % filteredUpgrades.Length];
+            filteredUpgrades = [.. filteredUpgrades.Where(u => u.Id != chosenUpgrade.Id)];
+
+            chosenUpgrades[i] = chosenUpgrade;
+        }
+
+        return chosenUpgrades;
     }
 
     private void ApplyUpgrade(AbilityUpgrade upgrade)
