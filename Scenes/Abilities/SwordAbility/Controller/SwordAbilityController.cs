@@ -58,7 +58,7 @@ public partial class SwordAbilityController : Node
         instance.GlobalPosition = target.GlobalPosition;
         instance.GlobalPosition += Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau)) * 4.0f;
 
-        var enemyDirection = target.GlobalPosition.DirectionTo(instance.GlobalPosition);
+        var enemyDirection = instance.GlobalPosition.DirectionTo(target.GlobalPosition);
         instance.Rotation = enemyDirection.Angle();
     }
 
