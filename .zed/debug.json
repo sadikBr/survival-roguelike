@@ -1,0 +1,7 @@
+[
+  {
+    "adapter": "godot",
+    "label": "Godot (Launch)",
+    "request": "launch"
+  }
+]
