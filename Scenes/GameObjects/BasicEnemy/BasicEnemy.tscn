@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c02hxsbnlk8yx" path="res://Scenes/GameObjects/BasicEnemy/BasicEnemy.cs" id="1_xkemt"]
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_3v5yd"]
 [ext_resource type="PackedScene" uid="uid://ig0rvjvxi83f" path="res://Scenes/Components/VialDropComponent/VialDropComponent.tscn" id="3_masdr"]
+[ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_pb5s6"]
 [ext_resource type="PackedScene" uid="uid://dqwe23xooyl6y" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="4_cct7w"]
 [ext_resource type="PackedScene" uid="uid://dqlfams7yupcb" path="res://Scenes/Components/DeathComponent/DeathComponent.tscn" id="4_ifawa"]
 
@@ -87,6 +88,8 @@ libraries/ = SubResource("AnimationLibrary_ifawa")
 autoplay = &"walk"
 
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_3v5yd")]
+
+[node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_pb5s6")]
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_masdr")]
 _healthComponent = NodePath("../HealthComponent")

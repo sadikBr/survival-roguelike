@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_hv3e8"]
 [ext_resource type="Texture2D" uid="uid://dyj8mrgrxc4y1" path="res://Scenes/GameObjects/WizardEnemy/wizard.png" id="2_mvjjy"]
 [ext_resource type="PackedScene" uid="uid://ig0rvjvxi83f" path="res://Scenes/Components/VialDropComponent/VialDropComponent.tscn" id="3_47s4o"]
+[ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_yv5cy"]
 [ext_resource type="PackedScene" uid="uid://dqlfams7yupcb" path="res://Scenes/Components/DeathComponent/DeathComponent.tscn" id="4_47s4o"]
 [ext_resource type="PackedScene" uid="uid://dqwe23xooyl6y" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="5_ukh5u"]
 
@@ -95,10 +96,9 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv5cy"]
-radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ukh5u"]
-radius = 7.0
+radius = 4.0
 
 [node name="WizardEnemy" type="CharacterBody2D" unique_id=2128712735 groups=["Enemy"]]
 collision_layer = 8
@@ -111,6 +111,8 @@ autoplay = &"walk"
 
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_hv3e8")]
 _maxHealth = 20.0
+
+[node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_yv5cy")]
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_47s4o")]
 _dropPercent = 0.5
@@ -128,7 +130,7 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_yv5cy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1669960336]
-position = Vector2(0, -7)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_ukh5u")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=344341370]

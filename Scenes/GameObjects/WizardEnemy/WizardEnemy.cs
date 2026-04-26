@@ -7,33 +7,22 @@ namespace Game.GameObjects.Entities;
 public partial class WizardEnemy : CharacterBody2D
 {
 
-    private const float MaxSpeed = 30.0f;
-
-    private HealthComponent _healthComponent;
+    private VelocityComponent _velocityComponent;
     private Node2D _visuals;
 
     public override void _Ready()
     {
-        _healthComponent = GetNode<HealthComponent>("HealthComponent");
+        _velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
         _visuals = GetNode<Node2D>("Visuals");
     }
 
     public override void _Process(double delta)
     {
-        var direction = GetDirectionToPlayer();
+        _velocityComponent.AccelerateToPlayer();
+        _velocityComponent.Move(this);
 
-        Velocity = direction * MaxSpeed;
-        MoveAndSlide();
-
-        var moveSign = Mathf.Sign(direction.X);
+        var moveSign = Mathf.Sign(Velocity.X);
         _visuals.Scale = moveSign == 0 ? Vector2.One : new Vector2(-moveSign, 1);
-    }
-
-    private Vector2 GetDirectionToPlayer()
-    {
-        return GetTree().GetFirstNodeInGroup(nameof(Player)) is not Player player
-            ? Vector2.Zero
-            : GlobalPosition.DirectionTo(player.GlobalPosition);
     }
 
 }
