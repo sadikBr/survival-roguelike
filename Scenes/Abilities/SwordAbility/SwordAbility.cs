@@ -14,7 +14,7 @@ public partial class SwordAbility : Node2D
         _hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         _hitboxComponent.SetDamage(damage);
     }

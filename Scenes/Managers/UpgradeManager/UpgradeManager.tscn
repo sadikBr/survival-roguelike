@@ -4,8 +4,13 @@
 [ext_resource type="Resource" uid="uid://f87qdid8sjgn" path="res://Resources/Data/Upgrades/sword_rate.tres" id="2_1vwja"]
 [ext_resource type="Resource" uid="uid://7b0ucgm40bne" path="res://Resources/Data/Upgrades/axe.tres" id="3_40pk6"]
 [ext_resource type="PackedScene" uid="uid://b2lt1e71t8t75" path="res://Scenes/UI/UpgradeScreen/UpgradeScreen.tscn" id="3_oupxr"]
+[ext_resource type="Resource" uid="uid://q27myctxmafj" path="res://Resources/Data/Upgrades/axe_damage.tres" id="5_0oq2c"]
+[ext_resource type="Resource" uid="uid://dewbbsw1tvn5" path="res://Resources/Data/Upgrades/sword_damage.tres" id="6_6kce5"]
 
 [node name="UpgradeManager" type="Node" unique_id=394817772]
 script = ExtResource("1_2ucxw")
 _upgradePool = [ExtResource("2_1vwja"), ExtResource("3_40pk6")]
 _upgradeScreenScene = ExtResource("3_oupxr")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="." unique_id=377397987]
+resources = [PackedStringArray("axe", "axe_damage", "sword_damage", "sword_rate"), [ExtResource("3_40pk6"), ExtResource("5_0oq2c"), ExtResource("6_6kce5"), ExtResource("2_1vwja")]]

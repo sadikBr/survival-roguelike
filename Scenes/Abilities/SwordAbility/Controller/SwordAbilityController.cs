@@ -16,8 +16,9 @@ public partial class SwordAbilityController : Node
     private PackedScene _swordAbility;
 
     private const float MaxRange = 150.0f;
-    private int _damage = 5;
     private float _baseWaitTime;
+    private float _baseDamage = 5.0f;
+    private float _damageMultiplier = 1.0f;
 
     private Timer _timer;
 
@@ -53,7 +54,7 @@ public partial class SwordAbilityController : Node
         var instance = _swordAbility.Instantiate<SwordAbility>();
         var foregroundLayer = GetTree().GetFirstNodeInGroup("ForegroundLayer");
         foregroundLayer.AddChild(instance);
-        instance.SetDamage(_damage);
+        instance.SetDamage(_baseDamage * _damageMultiplier);
 
         instance.GlobalPosition = target.GlobalPosition;
         instance.GlobalPosition += Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau)) * 4.0f;
@@ -64,11 +65,16 @@ public partial class SwordAbilityController : Node
 
     private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
     {
-        if (upgrade.Id != "sword_rate") return;
-
-        var percentReduction = currentUpgrades[upgrade.Id].Quantity * 0.1f;
-        _timer.WaitTime = Mathf.Max(_baseWaitTime * (1.0f - percentReduction), 0.1f);
-        _timer.Start();
+        if (upgrade.Id == "sword_rate")
+        {
+            var percentReduction = currentUpgrades[upgrade.Id].Quantity * 0.1f;
+            _timer.WaitTime = Mathf.Max(_baseWaitTime * (1.0f - percentReduction), 0.1f);
+            _timer.Start();
+        }
+        else if (upgrade.Id == "sword_damage")
+        {
+            _damageMultiplier = 1.0f + 0.15f * currentUpgrades[upgrade.Id].Quantity;
+        }
     }
 
 }

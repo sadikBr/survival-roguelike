@@ -24,7 +24,7 @@ public partial class AxeAbility : Node2D
         tween.TweenCallback(Callable.From(QueueFree));
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         _hitboxComponent.SetDamage(damage);
     }

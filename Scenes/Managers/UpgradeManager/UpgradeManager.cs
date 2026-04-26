@@ -1,8 +1,7 @@
-using System.Linq;
-
 using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
+using Game.Utils;
 
 using Godot;
 using Godot.Collections;
@@ -12,10 +11,13 @@ namespace Game.Managers;
 public partial class UpgradeManager : Node
 {
 
-    [Export] private AbilityUpgrade[] _upgradePool = [];
     [Export] private ExperienceManager _experienceManager;
     [Export] private PackedScene _upgradeScreenScene;
     [Export] private int _numberOfUpgradesToPick = 2;
+
+    private ResourcePreloader _resourcePreloader;
+
+    private WeightedTable<AbilityUpgrade> _upgradePool;
 
     public partial class UpgradeState : Resource
     {
@@ -31,7 +33,13 @@ public partial class UpgradeManager : Node
 
     public override void _Ready()
     {
+        _upgradePool = new();
+        _resourcePreloader = GetNode<ResourcePreloader>("ResourcePreloader");
         _experienceManager.LevelUp += OnLevelUp;
+
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe"), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_rate"), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_damage"), 10);
     }
 
     private void OnLevelUp(int newLevel)
@@ -46,19 +54,9 @@ public partial class UpgradeManager : Node
 
     private AbilityUpgrade[] PickUpgrades()
     {
-        if (_upgradePool.Length < _numberOfUpgradesToPick) return _upgradePool;
-
-        var chosenUpgrades = new AbilityUpgrade[_numberOfUpgradesToPick];
-        var filteredUpgrades = (AbilityUpgrade[])_upgradePool.Clone();
-        for (int i = 0; i < chosenUpgrades.Length; i++)
-        {
-            var chosenUpgrade = filteredUpgrades[GD.Randi() % filteredUpgrades.Length];
-            filteredUpgrades = [.. filteredUpgrades.Where(u => u.Id != chosenUpgrade.Id)];
-
-            chosenUpgrades[i] = chosenUpgrade;
-        }
-
-        return chosenUpgrades;
+        return _upgradePool.Count < _numberOfUpgradesToPick
+            ? _upgradePool.ToArray()
+            : _upgradePool.PickItems(_numberOfUpgradesToPick);
     }
 
     private void ApplyUpgrade(AbilityUpgrade upgrade)
@@ -82,16 +80,25 @@ public partial class UpgradeManager : Node
             var currentQuantity = _currentUpgrades[upgrade.Id].Quantity;
             if (currentQuantity == upgrade.MaxQuantity)
             {
-                _upgradePool = [.. _upgradePool.Where(u => u.Id != upgrade.Id)];
+                _upgradePool.RemoveItem(upgrade);
             }
         }
 
+        UpdateUpgradePool(upgrade);
         GameEvents.Instance.EmitAbilityUpgradeAdded(upgrade, _currentUpgrades);
     }
 
     private void OnUpgradeSelected(AbilityUpgrade upgrade)
     {
         ApplyUpgrade(upgrade);
+    }
+
+    private void UpdateUpgradePool(AbilityUpgrade upgrade)
+    {
+        if (upgrade.Id == "axe")
+        {
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe_damage"), 10);
+        }
     }
 
 }

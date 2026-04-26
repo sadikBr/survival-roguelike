@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 using Godot;
 using Godot.Collections;
 
@@ -15,6 +18,8 @@ public partial class WeightedTable<T> : RefCounted
     private Array<TableItem> _items = [];
     private int _totalWeight;
 
+    public int Count => _items.Count;
+
     public void AddItem(T item, int weight)
     {
         _totalWeight += weight;
@@ -23,6 +28,22 @@ public partial class WeightedTable<T> : RefCounted
             Item = item,
             Weight = weight
         });
+    }
+
+    public T[] PickItems(int count)
+    {
+        List<T> result = [];
+
+        while (result.Count < count)
+        {
+            var item = PickItem();
+            if (!result.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+
+        return [.. result];
     }
 
     public T PickItem()
@@ -41,6 +62,22 @@ public partial class WeightedTable<T> : RefCounted
             }
         }
 
+        return result;
+    }
+
+    public void RemoveItem(T item)
+    {
+        var itemToRemove = _items.FirstOrDefault(i => i.Item.Equals(item));
+        _items.Remove(itemToRemove);
+    }
+
+    public T[] ToArray()
+    {
+        var result = new T[_items.Count];
+        for (int i = 0; i < _items.Count; i++)
+        {
+            result[i] = _items[i].Item;
+        }
         return result;
     }
 
