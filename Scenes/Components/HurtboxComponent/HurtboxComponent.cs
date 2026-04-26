@@ -26,6 +26,6 @@ public partial class HurtboxComponent : Area2D
         var floatingText = _floatingTextScene.Instantiate<FloatingText>();
         GetTree().GetFirstNodeInGroup("ForegroundLayer").AddChild(floatingText);
         floatingText.GlobalPosition = GlobalPosition + (Vector2.Up * 16);
-        floatingText.Start(hitbox.Damage.ToString());
+        floatingText.Start(hitbox.Damage.ToString(Mathf.Round(hitbox.Damage) == hitbox.Damage ? "F0" : "F1"));
     }
 }
