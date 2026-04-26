@@ -90,6 +90,7 @@ autoplay = &"walk"
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_3v5yd")]
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_pb5s6")]
+_acceleration = 15.0
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_masdr")]
 _healthComponent = NodePath("../HealthComponent")

@@ -24,7 +24,7 @@ public partial class VelocityComponent : Node
     public void AccelerateInDirection(Vector2 direction)
     {
         var desiredVelocity = direction * _maxSpeed;
-        _velocity = _velocity.MoveToward(desiredVelocity, 1 - Mathf.Exp(-_acceleration * (float)GetProcessDeltaTime()));
+        _velocity = _velocity.Lerp(desiredVelocity, 1 - Mathf.Exp(-_acceleration * (float)GetProcessDeltaTime()));
     }
 
     public void Move(CharacterBody2D character)

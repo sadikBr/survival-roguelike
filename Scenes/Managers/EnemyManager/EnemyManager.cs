@@ -1,4 +1,5 @@
 using Game.GameObjects.Entities;
+using Game.Utils;
 
 using Godot;
 
@@ -7,16 +8,21 @@ namespace Game.Managers;
 public partial class EnemyManager : Node
 {
 
-    [Export] private PackedScene _basicEnemy;
+    [Export] private PackedScene _basicEnemyScene;
+    [Export] private PackedScene _wizardEnemyScene;
     [Export] private ArenaTimeManager _arenaTimeManager;
 
     private const float SpawnRadius = 375.0f;
     private float _baseSpawnInterval;
 
+    private WeightedTable<PackedScene> _enemyTable = new();
+
     private Timer _timer;
 
     public override void _Ready()
     {
+        _enemyTable.AddItem(_basicEnemyScene, 10);
+
         _timer = GetNode<Timer>("Timer");
         _baseSpawnInterval = (float)_timer.WaitTime;
         _timer.Timeout += OnTimerTimeout;
@@ -29,7 +35,8 @@ public partial class EnemyManager : Node
         _timer.Start();
         if (GetTree().GetFirstNodeInGroup(nameof(Player)) is not Player player) return;
 
-        var enemy = _basicEnemy.Instantiate<Node2D>();
+        var scene = _enemyTable.PickItem();
+        var enemy = scene.Instantiate<Node2D>();
 
         var entitiesLayer = GetTree().GetFirstNodeInGroup("EntitiesLayer");
         entitiesLayer.AddChild(enemy);
@@ -70,6 +77,11 @@ public partial class EnemyManager : Node
         var timeOff = (0.1f / 12) * arenaDifficulty;
         timeOff = Mathf.Min(timeOff, 0.7f);
         _timer.WaitTime = _baseSpawnInterval - timeOff;
+
+        if (arenaDifficulty == 6)
+        {
+            _enemyTable.AddItem(_wizardEnemyScene, 20);
+        }
     }
 
 }

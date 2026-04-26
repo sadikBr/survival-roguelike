@@ -113,6 +113,7 @@ autoplay = &"walk"
 _maxHealth = 20.0
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_yv5cy")]
+_acceleration = 10.0
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_47s4o")]
 _dropPercent = 0.5
