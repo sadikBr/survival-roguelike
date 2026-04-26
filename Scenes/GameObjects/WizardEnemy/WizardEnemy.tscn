@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://2lvg2xue1p4p" path="res://Scenes/GameObjects/WizardEnemy/WizardEnemy.cs" id="1_iw630"]
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_hv3e8"]
 [ext_resource type="Texture2D" uid="uid://dyj8mrgrxc4y1" path="res://Scenes/GameObjects/WizardEnemy/wizard.png" id="2_mvjjy"]
+[ext_resource type="PackedScene" uid="uid://cw6af8v40t48h" path="res://Scenes/Components/HitFlashComponent/HitFlashComponent.tscn" id="3_7y5g8"]
 [ext_resource type="PackedScene" uid="uid://ig0rvjvxi83f" path="res://Scenes/Components/VialDropComponent/VialDropComponent.tscn" id="3_47s4o"]
 [ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_yv5cy"]
 [ext_resource type="PackedScene" uid="uid://dqlfams7yupcb" path="res://Scenes/Components/DeathComponent/DeathComponent.tscn" id="4_47s4o"]
@@ -111,6 +112,10 @@ autoplay = &"walk"
 
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_hv3e8")]
 _maxHealth = 20.0
+
+[node name="HitFlashComponent" parent="." unique_id=1958699473 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("3_7y5g8")]
+_healthComponent = NodePath("../HealthComponent")
+_sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_yv5cy")]
 _acceleration = 10.0

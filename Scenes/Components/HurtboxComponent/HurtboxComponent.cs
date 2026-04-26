@@ -1,4 +1,4 @@
-using System;
+using Game.UI;
 
 using Godot;
 
@@ -7,6 +7,7 @@ namespace Game.Components;
 public partial class HurtboxComponent : Area2D
 {
 
+    [Export] private PackedScene _floatingTextScene;
     [Export] private HealthComponent _healthComponent;
 
     public override void _Ready()
@@ -21,5 +22,10 @@ public partial class HurtboxComponent : Area2D
         if (_healthComponent == null) return;
 
         _healthComponent.Damage(hitbox.Damage);
+
+        var floatingText = _floatingTextScene.Instantiate<FloatingText>();
+        GetTree().GetFirstNodeInGroup("ForegroundLayer").AddChild(floatingText);
+        floatingText.GlobalPosition = GlobalPosition + (Vector2.Up * 16);
+        floatingText.Start(hitbox.Damage.ToString());
     }
 }
