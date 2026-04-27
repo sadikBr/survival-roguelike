@@ -78,7 +78,7 @@ public partial class EnemyManager : Node
         timeOff = Mathf.Min(timeOff, 0.7f);
         _timer.WaitTime = _baseSpawnInterval - timeOff;
 
-        if (arenaDifficulty == 6)
+        if (arenaDifficulty == 12)
         {
             _enemyTable.AddItem(_wizardEnemyScene, 20);
         }

@@ -17,8 +17,8 @@ public partial class Player : CharacterBody2D
     private static readonly StringName ActionMoveUp = new("move_up");
     private static readonly StringName ActionMoveDown = new("move_down");
 
-    private static readonly StringName AnimationPlayerWalk = new("walk");
-    private static readonly StringName AnimationPlayerReset = new("RESET");
+    private static readonly StringName WalkAnimation = new("walk");
+    private static readonly StringName ResetAnimation = new("RESET");
 
     private int _numberOfCollidingBodies;
     private float _baseSpeed;
@@ -65,11 +65,11 @@ public partial class Player : CharacterBody2D
 
         if (direction.Length() > 0)
         {
-            _animationPlayer.Play(AnimationPlayerWalk);
+            _animationPlayer.Play(WalkAnimation);
         }
         else
         {
-            _animationPlayer.Play(AnimationPlayerReset);
+            _animationPlayer.Play(ResetAnimation);
         }
         var moveSign = Mathf.Sign(direction.X);
         _visuals.Scale = moveSign == 0 ? Vector2.One : new Vector2(moveSign, 1);
@@ -111,6 +111,10 @@ public partial class Player : CharacterBody2D
 
     private void OnHealthChanged(bool isDamage)
     {
+        if (isDamage)
+        {
+            GameEvents.Instance.EmitPlayerDamaged();
+        }
         UpdateHealthDisplay();
     }
 

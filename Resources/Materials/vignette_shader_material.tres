@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bvb7khkdj8enq"]
+
+[ext_resource type="Shader" uid="uid://dt0g5csnsuccv" path="res://Scenes/UI/Vignette/Vignette.gdshader" id="1_54iwj"]
+
+[resource]
+shader = ExtResource("1_54iwj")
+shader_parameter/vignette_intensity = 0.7
+shader_parameter/vignette_opacity = 0.10000000149012
+shader_parameter/vignette_rgb = Color(0.24705882, 0.14901961, 0.19215687, 1)

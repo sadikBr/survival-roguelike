@@ -125,7 +125,7 @@ _sprite = NodePath("../Visuals/Sprite2D")
 _hitFlashMaterial = SubResource("ShaderMaterial_o7ui3")
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_yv5cy")]
-_maxSpeed = 30
+MaxSpeed = 30.0
 _acceleration = 8.0
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_47s4o")]

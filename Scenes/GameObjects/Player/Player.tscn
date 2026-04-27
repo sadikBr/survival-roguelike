@@ -113,7 +113,7 @@ libraries/ = SubResource("AnimationLibrary_tgacc")
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_ev3h2")]
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_tgacc")]
-_maxSpeed = 65
+MaxSpeed = 65.0
 _acceleration = 25.0
 
 [node name="Abilities" type="Node" parent="." unique_id=1141242091]
