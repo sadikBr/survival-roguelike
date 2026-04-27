@@ -32,7 +32,7 @@ public partial class ExperienceVial : Node2D
         tween.TweenMethod(Callable.From((float percent) => TweenCollect(percent, startPosition)), 0.0f, 1.0f, .5f)
             .SetEase(Tween.EaseType.In)
             .SetTrans(Tween.TransitionType.Back);
-        tween.TweenProperty(_sprite, "scale", Vector2.Zero, 0.05f).SetDelay(0.45f);
+        tween.TweenProperty(_sprite, Node2D.PropertyName.Scale.ToString(), Vector2.Zero, 0.05f).SetDelay(0.45f);
         tween.Chain(); // this makes the tween wait for the previous animations to complete before starting the next ones.
         tween.TweenCallback(Callable.From(Collect));
     }
