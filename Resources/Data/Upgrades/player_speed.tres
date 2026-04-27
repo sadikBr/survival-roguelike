@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" format=3 uid="uid://cgyq12e0qg8o8"]
+
+[ext_resource type="Script" uid="uid://dka08wm1xbyqg" path="res://Resources/Upgrades/AbilityUpgrade.cs" id="1_7ai4c"]
+
+[resource]
+script = ExtResource("1_7ai4c")
+Id = "player_speed"
+MaxQuantity = 4
+Name = "Player Speed"
+Description = "Increased the Player speed by 25%"
+metadata/_custom_type_script = "uid://dka08wm1xbyqg"

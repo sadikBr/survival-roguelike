@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ig0rvjvxi83f" path="res://Scenes/Components/VialDropComponent/VialDropComponent.tscn" id="3_47s4o"]
 [ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_yv5cy"]
 [ext_resource type="PackedScene" uid="uid://dqlfams7yupcb" path="res://Scenes/Components/DeathComponent/DeathComponent.tscn" id="4_47s4o"]
+[ext_resource type="Shader" uid="uid://ba1k8olpg8s7c" path="res://Scenes/Components/HitFlashComponent/HitFlashComponent.gdshader" id="4_vf0k0"]
 [ext_resource type="PackedScene" uid="uid://dqwe23xooyl6y" path="res://Scenes/Components/HurtboxComponent/HurtboxComponent.tscn" id="5_ukh5u"]
 
 [sub_resource type="Animation" id="Animation_ukh5u"]
@@ -96,6 +97,11 @@ _data = {
 &"walk": SubResource("Animation_yv5cy")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7ui3"]
+resource_local_to_scene = true
+shader = ExtResource("4_vf0k0")
+shader_parameter/percent = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_yv5cy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ukh5u"]
@@ -116,9 +122,11 @@ _maxHealth = 20.0
 [node name="HitFlashComponent" parent="." unique_id=1958699473 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("3_7y5g8")]
 _healthComponent = NodePath("../HealthComponent")
 _sprite = NodePath("../Visuals/Sprite2D")
+_hitFlashMaterial = SubResource("ShaderMaterial_o7ui3")
 
 [node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_yv5cy")]
-_acceleration = 10.0
+_maxSpeed = 30
+_acceleration = 8.0
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_47s4o")]
 _dropPercent = 0.5

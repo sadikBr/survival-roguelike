@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dropxhtkehwud" path="res://Scenes/GameObjects/Player/player.png" id="1_s0eop"]
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_ev3h2"]
 [ext_resource type="PackedScene" uid="uid://c8xr05xvgcln3" path="res://Scenes/Abilities/SwordAbility/Controller/SwordAbilityController.tscn" id="2_h54ih"]
+[ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_tgacc"]
 
 [sub_resource type="Animation" id="Animation_tgacc"]
 length = 0.001
@@ -110,6 +111,10 @@ script = ExtResource("1_ft8w5")
 libraries/ = SubResource("AnimationLibrary_tgacc")
 
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_ev3h2")]
+
+[node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_tgacc")]
+_maxSpeed = 65
+_acceleration = 25.0
 
 [node name="Abilities" type="Node" parent="." unique_id=1141242091]
 

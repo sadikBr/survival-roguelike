@@ -20,15 +20,14 @@ public partial class Player : CharacterBody2D
     private static readonly StringName AnimationPlayerWalk = new("walk");
     private static readonly StringName AnimationPlayerReset = new("RESET");
 
-    private const float MaxSpeed = 125.0f;
-    private const float Acceleration = 25.0f;
-
     private int _numberOfCollidingBodies;
+    private float _baseSpeed;
 
     private AnimationPlayer _animationPlayer;
     private Node2D _visuals;
     private Area2D _collisionArea;
     private HealthComponent _healthComponent;
+    private VelocityComponent _velocityComponent;
     private Timer _damageIntervalTimer;
     private ProgressBar _healthBar;
     private Node _abilities;
@@ -45,6 +44,9 @@ public partial class Player : CharacterBody2D
         _healthComponent = GetNode<HealthComponent>("HealthComponent");
         _healthComponent.HealthChanged += OnHealthChanged;
 
+        _velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        _baseSpeed = _velocityComponent.MaxSpeed;
+
         _damageIntervalTimer = GetNode<Timer>("DamageIntervalTimer");
         _damageIntervalTimer.Timeout += OnDamageIntervalTimerTimeout;
 
@@ -58,10 +60,8 @@ public partial class Player : CharacterBody2D
     public override void _Process(double delta)
     {
         var direction = Input.GetVector(ActionMoveLeft, ActionMoveRight, ActionMoveUp, ActionMoveDown);
-        var targetVelocity = direction * MaxSpeed;
-
-        Velocity = Velocity.Lerp(targetVelocity, 1 - Mathf.Exp((float)delta * -Acceleration));
-        MoveAndSlide();
+        _velocityComponent.AccelerateInDirection(direction);
+        _velocityComponent.Move(this);
 
         if (direction.Length() > 0)
         {
@@ -116,10 +116,16 @@ public partial class Player : CharacterBody2D
 
     private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
     {
-        if (upgrade is not Ability newAbility) return;
-
-        var abilityInstance = newAbility.AbilityControllerScene.Instantiate();
-        _abilities.AddChild(abilityInstance);
+        if (upgrade is Ability newAbility)
+        {
+            var abilityInstance = newAbility.AbilityControllerScene.Instantiate();
+            _abilities.AddChild(abilityInstance);
+        }
+        else if (upgrade.Id == "player_speed")
+        {
+            var newMaxSpeed = _baseSpeed + _baseSpeed * currentUpgrades[upgrade.Id].Quantity * 0.25f;
+            _velocityComponent.UpdateMaxSpeed(newMaxSpeed);
+        }
     }
 
 }

@@ -40,6 +40,7 @@ public partial class UpgradeManager : Node
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe"), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_rate"), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_damage"), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("player_speed"), 5);
     }
 
     private void OnLevelUp(int newLevel)
