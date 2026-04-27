@@ -92,17 +92,6 @@ _data = {
 &"walk": SubResource("Animation_ev3h2")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev3h2"]
-bg_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgacc"]
-bg_color = Color(0.2627451, 0.88235295, 0.7019608, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_qjued"]
 radius = 24.0
 
@@ -137,8 +126,6 @@ offset_top = -23.0
 offset_right = 16.0
 offset_bottom = -17.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_styles/background = SubResource("StyleBoxFlat_ev3h2")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tgacc")
 max_value = 1.0
 value = 0.5
 show_percentage = false
