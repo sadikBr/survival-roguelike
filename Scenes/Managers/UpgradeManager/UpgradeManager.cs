@@ -1,3 +1,5 @@
+using System;
+
 using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
@@ -11,6 +13,7 @@ namespace Game.Managers;
 public partial class UpgradeManager : Node
 {
 
+    [Export] private ArenaTimeManager _arenaTimeManager;
     [Export] private ExperienceManager _experienceManager;
     [Export] private PackedScene _upgradeScreenScene;
     [Export] private int _numberOfUpgradesToPick = 2;
@@ -40,7 +43,9 @@ public partial class UpgradeManager : Node
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe"), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_rate"), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_damage"), 10);
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("player_speed"), 5);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("player_speed"), 3);
+
+        _arenaTimeManager.ArenaDifficultyIncreased += OnArenaDifficultyIncreased;
     }
 
     private void OnLevelUp(int newLevel)
@@ -89,16 +94,24 @@ public partial class UpgradeManager : Node
         GameEvents.Instance.EmitAbilityUpgradeAdded(upgrade, _currentUpgrades);
     }
 
-    private void OnUpgradeSelected(AbilityUpgrade upgrade)
-    {
-        ApplyUpgrade(upgrade);
-    }
-
     private void UpdateUpgradePool(AbilityUpgrade upgrade)
     {
         if (upgrade.Id == "axe")
         {
             _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe_damage"), 10);
+        }
+    }
+
+    private void OnUpgradeSelected(AbilityUpgrade upgrade)
+    {
+        ApplyUpgrade(upgrade);
+    }
+
+    private void OnArenaDifficultyIncreased(int arenaDifficulty)
+    {
+        if (arenaDifficulty == 18)
+        {
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_targets"), 5);
         }
     }
 

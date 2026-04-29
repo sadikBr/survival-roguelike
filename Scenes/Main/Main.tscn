@@ -32,7 +32,8 @@ _arenaTimeManager = NodePath("../ArenaTimeManager")
 
 [node name="ExperienceManager" parent="." unique_id=889025972 instance=ExtResource("4_aw1lf")]
 
-[node name="UpgradeManager" parent="." unique_id=394817772 node_paths=PackedStringArray("_experienceManager") instance=ExtResource("6_7npjy")]
+[node name="UpgradeManager" parent="." unique_id=394817772 node_paths=PackedStringArray("_arenaTimeManager", "_experienceManager") instance=ExtResource("6_7npjy")]
+_arenaTimeManager = NodePath("../ArenaTimeManager")
 _experienceManager = NodePath("../ExperienceManager")
 
 [node name="GameCamera" parent="." unique_id=1392621928 instance=ExtResource("1_cmk6n")]

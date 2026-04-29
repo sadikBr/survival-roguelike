@@ -17,6 +17,7 @@ public partial class SwordAbilityController : Node
 
     private const float MaxRange = 150.0f;
     private float _baseWaitTime;
+    private int _numberOfTargets = 1;
     private float _baseDamage = 5.0f;
     private float _damageMultiplier = 1.0f;
 
@@ -49,18 +50,21 @@ public partial class SwordAbilityController : Node
             var distanceB = ((Node2D)b).GlobalPosition.DistanceSquaredTo(player.GlobalPosition);
             return distanceA.CompareTo(distanceB);
         });
-        var target = filteredEnemies[0] as Node2D;
+        var targets = filteredEnemies.Take(_numberOfTargets).Cast<Node2D>().ToArray();
 
-        var instance = _swordAbility.Instantiate<SwordAbility>();
-        var foregroundLayer = GetTree().GetFirstNodeInGroup("ForegroundLayer");
-        foregroundLayer.AddChild(instance);
-        instance.SetDamage(_baseDamage * _damageMultiplier);
+        foreach (var target in targets)
+        {
+            var instance = _swordAbility.Instantiate<SwordAbility>();
+            var foregroundLayer = GetTree().GetFirstNodeInGroup("ForegroundLayer");
+            foregroundLayer.AddChild(instance);
+            instance.SetDamage(_baseDamage * _damageMultiplier);
 
-        instance.GlobalPosition = target.GlobalPosition;
-        instance.GlobalPosition += Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau)) * 4.0f;
+            instance.GlobalPosition = target.GlobalPosition;
+            instance.GlobalPosition += Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau)) * 4.0f;
 
-        var enemyDirection = instance.GlobalPosition.DirectionTo(target.GlobalPosition);
-        instance.Rotation = enemyDirection.Angle();
+            var enemyDirection = instance.GlobalPosition.DirectionTo(target.GlobalPosition);
+            instance.Rotation = enemyDirection.Angle();
+        }
     }
 
     private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
@@ -74,6 +78,10 @@ public partial class SwordAbilityController : Node
         else if (upgrade.Id == "sword_damage")
         {
             _damageMultiplier = 1.0f + 0.15f * currentUpgrades[upgrade.Id].Quantity;
+        }
+        else if (upgrade.Id == "sword_targets")
+        {
+            _numberOfTargets = 1 + currentUpgrades[upgrade.Id].Quantity;
         }
     }
 

@@ -74,7 +74,7 @@ public partial class EnemyManager : Node
 
     private void OnArenaDifficultyIncreased(int arenaDifficulty)
     {
-        var timeOff = (0.1f / 12) * arenaDifficulty;
+        var timeOff = 0.1f * (arenaDifficulty / 12);
         timeOff = Mathf.Min(timeOff, 0.7f);
         _timer.WaitTime = _baseSpawnInterval - timeOff;
 

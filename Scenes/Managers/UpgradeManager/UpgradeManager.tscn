@@ -7,10 +7,11 @@
 [ext_resource type="Resource" uid="uid://q27myctxmafj" path="res://Resources/Data/Upgrades/axe_damage.tres" id="5_0oq2c"]
 [ext_resource type="Resource" uid="uid://cgyq12e0qg8o8" path="res://Resources/Data/Upgrades/player_speed.tres" id="5_6kce5"]
 [ext_resource type="Resource" uid="uid://dewbbsw1tvn5" path="res://Resources/Data/Upgrades/sword_damage.tres" id="6_6kce5"]
+[ext_resource type="Resource" uid="uid://cp5m0hip7lduo" path="res://Resources/Data/Upgrades/sword_targets.tres" id="8_fa58x"]
 
 [node name="UpgradeManager" type="Node" unique_id=394817772]
 script = ExtResource("1_2ucxw")
 _upgradeScreenScene = ExtResource("3_oupxr")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="." unique_id=377397987]
-resources = [PackedStringArray("axe", "axe_damage", "player_speed", "sword_damage", "sword_rate"), [ExtResource("3_40pk6"), ExtResource("5_0oq2c"), ExtResource("5_6kce5"), ExtResource("6_6kce5"), ExtResource("2_1vwja")]]
+resources = [PackedStringArray("axe", "axe_damage", "player_speed", "sword_damage", "sword_rate", "sword_targets"), [ExtResource("3_40pk6"), ExtResource("5_0oq2c"), ExtResource("5_6kce5"), ExtResource("6_6kce5"), ExtResource("2_1vwja"), ExtResource("8_fa58x")]]
