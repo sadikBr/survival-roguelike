@@ -4,6 +4,7 @@ using Game.Autoloads;
 using Game.GameObjects.Entities;
 using Game.Managers;
 using Game.Resources.Upgrades;
+using Game.Upgrades;
 
 using Godot;
 using Godot.Collections;
@@ -69,17 +70,17 @@ public partial class SwordAbilityController : Node
 
     private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
     {
-        if (upgrade.Id == "sword_rate")
+        if (upgrade.Id == UpgradeStringNames.SwordRateUpgrade)
         {
             var percentReduction = currentUpgrades[upgrade.Id].Quantity * 0.1f;
             _timer.WaitTime = Mathf.Max(_baseWaitTime * (1.0f - percentReduction), 0.1f);
             _timer.Start();
         }
-        else if (upgrade.Id == "sword_damage")
+        else if (upgrade.Id == UpgradeStringNames.SwordDamageUpgrade)
         {
             _damageMultiplier = 1.0f + 0.15f * currentUpgrades[upgrade.Id].Quantity;
         }
-        else if (upgrade.Id == "sword_targets")
+        else if (upgrade.Id == UpgradeStringNames.SwordTargetsUpgrade)
         {
             _numberOfTargets = 1 + currentUpgrades[upgrade.Id].Quantity;
         }

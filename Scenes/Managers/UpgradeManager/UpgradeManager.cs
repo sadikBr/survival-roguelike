@@ -3,6 +3,7 @@ using System;
 using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
+using Game.Upgrades;
 using Game.Utils;
 
 using Godot;
@@ -40,10 +41,10 @@ public partial class UpgradeManager : Node
         _resourcePreloader = GetNode<ResourcePreloader>("ResourcePreloader");
         _experienceManager.LevelUp += OnLevelUp;
 
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe"), 10);
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_rate"), 10);
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_damage"), 10);
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("player_speed"), 3);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AxeUpgrade), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordRateUpgrade), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordDamageUpgrade), 10);
+        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.PlayerSpeedUpgrade), 3);
 
         _arenaTimeManager.ArenaDifficultyIncreased += OnArenaDifficultyIncreased;
     }
@@ -96,9 +97,9 @@ public partial class UpgradeManager : Node
 
     private void UpdateUpgradePool(AbilityUpgrade upgrade)
     {
-        if (upgrade.Id == "axe")
+        if (upgrade.Id == UpgradeStringNames.AxeUpgrade)
         {
-            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("axe_damage"), 10);
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AxeDamageUpgrade), 10);
         }
     }
 
@@ -111,7 +112,7 @@ public partial class UpgradeManager : Node
     {
         if (arenaDifficulty == 18)
         {
-            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource("sword_targets"), 5);
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordTargetsUpgrade), 5);
         }
     }
 

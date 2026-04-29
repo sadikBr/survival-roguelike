@@ -2,6 +2,7 @@ using Game.Autoloads;
 using Game.GameObjects.Entities;
 using Game.Managers;
 using Game.Resources.Upgrades;
+using Game.Upgrades;
 
 using Godot;
 using Godot.Collections;
@@ -40,7 +41,7 @@ public partial class AxeAbilityController : Node
 
     private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
     {
-        if (upgrade.Id == "axe_damage")
+        if (upgrade.Id == UpgradeStringNames.AxeDamageUpgrade)
         {
             _damageMultiplier = 1.0f + 0.1f * currentUpgrades[upgrade.Id].Quantity;
         }

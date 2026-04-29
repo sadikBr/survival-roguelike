@@ -4,6 +4,7 @@ using Game.Autoloads;
 using Game.Components;
 using Game.Managers;
 using Game.Resources.Upgrades;
+using Game.Upgrades;
 
 using Godot;
 using Godot.Collections;
@@ -125,7 +126,7 @@ public partial class Player : CharacterBody2D
             var abilityInstance = newAbility.AbilityControllerScene.Instantiate();
             _abilities.AddChild(abilityInstance);
         }
-        else if (upgrade.Id == "player_speed")
+        else if (upgrade.Id == UpgradeStringNames.PlayerSpeedUpgrade)
         {
             var newMaxSpeed = _baseSpeed + _baseSpeed * currentUpgrades[upgrade.Id].Quantity * 0.25f;
             _velocityComponent.UpdateMaxSpeed(newMaxSpeed);
