@@ -5,6 +5,8 @@ namespace Game.UI;
 public partial class MainMenu : CanvasLayer
 {
 
+    [Export] private PackedScene _optionsScene;
+
     private Button _playButton;
     private Button _optionsButton;
     private Button _quitButton;
@@ -27,6 +29,14 @@ public partial class MainMenu : CanvasLayer
 
     private void OnOptionsButtonPressed()
     {
+        var instance = _optionsScene.Instantiate<OptionsMenu>();
+        AddChild(instance);
+        instance.BackButtonPressed += () => OnOptionsScreenBackButtonPressed(instance);
+    }
+
+    private void OnOptionsScreenBackButtonPressed(OptionsMenu optionsMenu)
+    {
+        optionsMenu.QueueFree();
     }
 
     private void OnQuitButtonPressed()
