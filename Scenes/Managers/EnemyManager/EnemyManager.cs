@@ -53,11 +53,12 @@ public partial class EnemyManager : Node
         for (int i = 0; i < 4; i++)
         {
             spawnPosition = player.GlobalPosition + randomDirection * SpawnRadius;
+            var additionalOffset = randomDirection * 20;
 
             var queryParams = new PhysicsRayQueryParameters2D()
             {
                 From = player.GlobalPosition,
-                To = spawnPosition,
+                To = spawnPosition + additionalOffset,
                 CollisionMask = 1
             };
             var result = GetTree().Root.World2D.DirectSpaceState.IntersectRay(queryParams);
