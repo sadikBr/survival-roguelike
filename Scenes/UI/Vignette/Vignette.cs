@@ -17,6 +17,11 @@ public partial class Vignette : CanvasLayer
         GameEvents.Instance.PlayerDamaged += OnPlayerDamaged;
     }
 
+    public override void _ExitTree()
+    {
+        GameEvents.Instance.PlayerDamaged -= OnPlayerDamaged;
+    }
+
     private void OnPlayerDamaged()
     {
         _animationPlayer.Play(HitAnimation);
