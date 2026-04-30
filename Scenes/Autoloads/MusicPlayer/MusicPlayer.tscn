@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b7gbrckcgy02m"]
+
+[ext_resource type="AudioStream" uid="uid://dsxfsyt8e7dyn" path="res://Assets/Sounds/Hear+What+They+Say.mp3" id="1_hpmew"]
+[ext_resource type="Script" uid="uid://60v7ebv7o0sv" path="res://Scenes/Autoloads/MusicPlayer/MusicPlayer.cs" id="2_rtqhf"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=336996527]
+process_mode = 3
+stream = ExtResource("1_hpmew")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_rtqhf")
+
+[node name="Timer" type="Timer" parent="." unique_id=1278760259]
+wait_time = 15.0
+one_shot = true
