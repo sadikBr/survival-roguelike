@@ -13,7 +13,12 @@ config_version=5
 config/name="Survival Roguelike"
 run/main_scene="uid://bqxu4hxsbgnlx"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.24705882, 0.14901961, 0.19215687, 1)
+boot_splash/stretch_mode=0
+boot_splash/use_filter=false
+boot_splash/image="uid://bjs5agivom50a"
+config/icon="uid://bjs5agivom50a"
+config/windows_native_icon="res://icon.ico"
 
 [audio]
 
@@ -29,6 +34,7 @@ ScreenTransition="*uid://dcyawwi4ghqum"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
