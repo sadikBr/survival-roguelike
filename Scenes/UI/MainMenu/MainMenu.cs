@@ -1,3 +1,5 @@
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.UI;
@@ -22,13 +24,17 @@ public partial class MainMenu : CanvasLayer
         _quitButton.Pressed += OnQuitButtonPressed;
     }
 
-    private void OnPlayButtonPressed()
+    private async void OnPlayButtonPressed()
     {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         GetTree().ChangeSceneToFile("res://Scenes/Main/Main.tscn");
     }
 
-    private void OnOptionsButtonPressed()
+    private async void OnOptionsButtonPressed()
     {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         var instance = _optionsScene.Instantiate<OptionsMenu>();
         AddChild(instance);
         instance.BackButtonPressed += () => OnOptionsScreenBackButtonPressed(instance);

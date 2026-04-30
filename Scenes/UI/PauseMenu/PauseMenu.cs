@@ -1,3 +1,5 @@
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.UI;
@@ -70,8 +72,10 @@ public partial class PauseMenu : CanvasLayer
         Close();
     }
 
-    private void OnOptionsButtonPressed()
+    private async void OnOptionsButtonPressed()
     {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         var optionsInstance = _optionsScene.Instantiate<OptionsMenu>();
         AddChild(optionsInstance);
         optionsInstance.BackButtonPressed += () => OnOptionsBackButtonPressed(optionsInstance);
@@ -82,8 +86,10 @@ public partial class PauseMenu : CanvasLayer
         menu.QueueFree();
     }
 
-    private void OnQuitToMenuButtonPressed()
+    private async void OnQuitToMenuButtonPressed()
     {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         GetTree().Paused = false;
         GetTree().ChangeSceneToFile("res://Scenes/UI/MainMenu/MainMenu.tscn");
     }

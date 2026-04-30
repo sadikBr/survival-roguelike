@@ -1,3 +1,5 @@
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.UI;
@@ -58,8 +60,10 @@ public partial class EndScreen : CanvasLayer
         GetTree().Quit();
     }
 
-    private void OnRestartButtonPressed()
+    private async void OnRestartButtonPressed()
     {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         GetTree().Paused = false;
         GetTree().ChangeSceneToFile("res://Scenes/Main/Main.tscn");
     }

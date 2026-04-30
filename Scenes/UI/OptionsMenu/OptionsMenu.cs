@@ -1,5 +1,7 @@
 using System;
 
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.UI;
@@ -26,7 +28,7 @@ public partial class OptionsMenu : CanvasLayer
         _sfxSlider.ValueChanged += OnSFXSliderChanged;
         _musicSlider.ValueChanged += OnMusicSliderChanged;
         _windowModeButton.Pressed += OnWindowModeButtonPressed;
-        _backButton.Pressed += () => EmitSignal(SignalName.BackButtonPressed);
+        _backButton.Pressed += OnBackButtonPressed;
     }
 
     public void UpdateDisplay()
@@ -72,6 +74,13 @@ public partial class OptionsMenu : CanvasLayer
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
         }
         UpdateDisplay();
+    }
+
+    private async void OnBackButtonPressed()
+    {
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
+        EmitSignal(SignalName.BackButtonPressed);
     }
 
 }
