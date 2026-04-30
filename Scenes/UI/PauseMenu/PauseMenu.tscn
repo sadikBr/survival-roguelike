@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://bs7objovqfdqm"]
+
+[ext_resource type="Script" uid="uid://fqaei8b3tuk0" path="res://Scenes/UI/PauseMenu/PauseMenu.cs" id="1_psikb"]
+[ext_resource type="PackedScene" uid="uid://civmyrxab832v" path="res://Scenes/UI/OptionsMenu/OptionsMenu.tscn" id="2_0nva5"]
+[ext_resource type="PackedScene" uid="uid://cecni4ao4q1l7" path="res://Scenes/UI/SoundButton/SoundButton.tscn" id="2_7g5nr"]
+
+[sub_resource type="Animation" id="Animation_7g5nr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_psikb"]
+resource_name = "default"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7g5nr"]
+_data = {
+&"RESET": SubResource("Animation_7g5nr"),
+&"default": SubResource("Animation_psikb")
+}
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1435755218]
+process_mode = 3
+script = ExtResource("1_psikb")
+_optionsScene = ExtResource("2_0nva5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2136379964]
+libraries/ = SubResource("AnimationLibrary_7g5nr")
+autoplay = &"default"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=879455219]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.60784316, 0.29803923, 0.6392157, 0.3529412)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=653035607]
+custom_minimum_size = Vector2(180, 140)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -58.5
+offset_right = 87.0
+offset_bottom = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=466463882]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1048590081]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=721372241]
+layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=338771590]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResumeButton" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1814104465 instance=ExtResource("2_7g5nr")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionsButton" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1360890361 instance=ExtResource("2_7g5nr")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=857908776 instance=ExtResource("2_7g5nr")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit to Menu"

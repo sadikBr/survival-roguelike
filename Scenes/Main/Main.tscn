@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cc75i8sqv7f6e" path="res://Scenes/UI/ExperienceBar/ExperienceBar.tscn" id="2_5s61s"]
 [ext_resource type="PackedScene" uid="uid://ctabb5sbh10ap" path="res://Scenes/Managers/ArenaTimeManager/ArenaTimeManager.tscn" id="2_w20t6"]
 [ext_resource type="PackedScene" uid="uid://eaxulpxkh0ci" path="res://Scenes/UI/EndScreen/EndScreen.tscn" id="2_wgovn"]
+[ext_resource type="PackedScene" uid="uid://bs7objovqfdqm" path="res://Scenes/UI/PauseMenu/PauseMenu.tscn" id="3_cv8e0"]
 [ext_resource type="PackedScene" uid="uid://urqpavln4xqf" path="res://Scenes/UI/Vignette/Vignette.tscn" id="3_wgovn"]
 [ext_resource type="PackedScene" uid="uid://c6270ol86tnei" path="res://Scenes/Managers/ExperienceManager/ExperienceManager.tscn" id="4_aw1lf"]
 [ext_resource type="PackedScene" uid="uid://27ks4apnmcqo" path="res://Scenes/Managers/UpgradeManager/UpgradeManager.tscn" id="6_7npjy"]
@@ -16,6 +17,7 @@
 [node name="Main" type="Node" unique_id=804412926]
 script = ExtResource("1_dvlhv")
 _endScreenScene = ExtResource("2_wgovn")
+_pauseScreenScene = ExtResource("3_cv8e0")
 
 [node name="Vignette" parent="." unique_id=1420521353 instance=ExtResource("3_wgovn")]
 
