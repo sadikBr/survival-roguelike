@@ -15,8 +15,10 @@ public partial class EnemyManager : Node
 
     private const float SpawnRadius = 375.0f;
     private float _baseSpawnInterval;
+    private int _numberOfEnemiesToSpawn = 1;
+    private int _maxEnemiesToSpawn = 5;
 
-    private WeightedTable<PackedScene> _enemyTable = new();
+    private readonly WeightedTable<PackedScene> _enemyTable = new();
 
     private Timer _timer;
 
@@ -36,12 +38,15 @@ public partial class EnemyManager : Node
         _timer.Start();
         if (GetTree().GetFirstNodeInGroup(nameof(Player)) is not Player player) return;
 
-        var scene = _enemyTable.PickItem();
-        var enemy = scene.Instantiate<Node2D>();
+        for (var i = 0; i < _numberOfEnemiesToSpawn; i++)
+        {
+            var scene = _enemyTable.PickItem();
+            var enemy = scene.Instantiate<Node2D>();
 
-        var entitiesLayer = GetTree().GetFirstNodeInGroup("EntitiesLayer");
-        entitiesLayer.AddChild(enemy);
-        enemy.GlobalPosition = GetSpawnPosition();
+            var entitiesLayer = GetTree().GetFirstNodeInGroup("EntitiesLayer");
+            entitiesLayer.AddChild(enemy);
+            enemy.GlobalPosition = GetSpawnPosition();
+        }
     }
 
     private Vector2 GetSpawnPosition()
@@ -80,13 +85,18 @@ public partial class EnemyManager : Node
         timeOff = Mathf.Min(timeOff, 0.7f);
         _timer.WaitTime = _baseSpawnInterval - timeOff;
 
+        if (arenaDifficulty % 12 == 0)
+        {
+            _numberOfEnemiesToSpawn = Mathf.Min(_numberOfEnemiesToSpawn + 1, _maxEnemiesToSpawn);
+        }
+
         if (arenaDifficulty == 12)
         {
-            _enemyTable.AddItem(_wizardEnemyScene, 20);
+            _enemyTable.AddItem(_wizardEnemyScene, 15);
         }
         else if (arenaDifficulty == 24)
         {
-            _enemyTable.AddItem(_batEnemyScene, 30);
+            _enemyTable.AddItem(_batEnemyScene, 5);
         }
     }
 

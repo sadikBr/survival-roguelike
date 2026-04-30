@@ -61,7 +61,7 @@ public partial class UpgradeManager : Node
 
     private AbilityUpgrade[] PickUpgrades()
     {
-        return _upgradePool.Count < _numberOfUpgradesToPick
+        return _upgradePool.Count <= _numberOfUpgradesToPick
             ? _upgradePool.ToArray()
             : _upgradePool.PickItems(_numberOfUpgradesToPick);
     }
