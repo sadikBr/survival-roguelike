@@ -11,11 +11,13 @@ public partial class DeathComponent : Node2D
 
     private AnimationPlayer _animationPlayer;
     private GpuParticles2D _particles;
+    private RandomAudioStreamPlayerComponent _randomAudioStreamPlayerComponent;
 
     public override void _Ready()
     {
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _particles = GetNode<GpuParticles2D>("GPUParticles2D");
+        _randomAudioStreamPlayerComponent = GetNode<RandomAudioStreamPlayerComponent>("RandomAudioStreamPlayerComponent");
 
         _particles.Texture = _sprite.Texture;
         _healthComponent.Died += OnDied;
@@ -32,5 +34,6 @@ public partial class DeathComponent : Node2D
         GlobalPosition = spawnPosition;
 
         _animationPlayer.Play(AnimationPlayerDefault);
+        _randomAudioStreamPlayerComponent.PlayRandom();
     }
 }

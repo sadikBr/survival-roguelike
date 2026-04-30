@@ -29,6 +29,7 @@ public partial class Player : CharacterBody2D
     private Area2D _collisionArea;
     private HealthComponent _healthComponent;
     private VelocityComponent _velocityComponent;
+    private RandomAudioStreamPlayerComponent _randomAudioStreamPlayerComponent;
     private Timer _damageIntervalTimer;
     private ProgressBar _healthBar;
     private Node _abilities;
@@ -55,6 +56,7 @@ public partial class Player : CharacterBody2D
         UpdateHealthDisplay();
 
         _abilities = GetNode<Node>("Abilities");
+        _randomAudioStreamPlayerComponent = GetNode<RandomAudioStreamPlayerComponent>("RandomAudioStreamPlayerComponent");
         GameEvents.Instance.AbilityUpgradeAdded += OnAbilityUpgradeAdded;
     }
 
@@ -115,6 +117,7 @@ public partial class Player : CharacterBody2D
         if (isDamage)
         {
             GameEvents.Instance.EmitPlayerDamaged();
+            _randomAudioStreamPlayerComponent.PlayRandom();
         }
         UpdateHealthDisplay();
     }

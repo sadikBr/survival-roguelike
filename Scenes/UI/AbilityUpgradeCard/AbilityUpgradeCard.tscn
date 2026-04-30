@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://ckqj18k11xlb3"]
 
 [ext_resource type="Script" uid="uid://dovsrcwsgugn1" path="res://Scenes/UI/AbilityUpgradeCard/AbilityUpgradeCard.cs" id="1_vjcf5"]
+[ext_resource type="PackedScene" uid="uid://daubegqlqkgpq" path="res://Scenes/Components/RandomUIAudioStreamPlayerComponent/RandomUIAudioStreamPlayerComponent.tscn" id="2_0oyly"]
+[ext_resource type="AudioStream" uid="uid://b4qnwgytyvl5v" path="res://Assets/Sounds/switch1.ogg" id="3_epci2"]
+[ext_resource type="AudioStream" uid="uid://dp1t5gh45iykw" path="res://Assets/Sounds/switch2.ogg" id="4_7gx8s"]
+[ext_resource type="AudioStream" uid="uid://d1rb5hni10oq8" path="res://Assets/Sounds/switch3.ogg" id="5_7a4mn"]
+[ext_resource type="AudioStream" uid="uid://bqgfrjl7qnngl" path="res://Assets/Sounds/switch4.ogg" id="6_ovpf2"]
+[ext_resource type="AudioStream" uid="uid://dkvn0drumq6hl" path="res://Assets/Sounds/switch5.ogg" id="7_ku6so"]
+[ext_resource type="AudioStream" uid="uid://bvlrpbimtpwyf" path="res://Assets/Sounds/switch6.ogg" id="8_ton6w"]
+[ext_resource type="AudioStream" uid="uid://c2grtpimrdpyr" path="res://Assets/Sounds/switch7.ogg" id="9_fbp2f"]
+[ext_resource type="AudioStream" uid="uid://cbmosbfbhg673" path="res://Assets/Sounds/switch8.ogg" id="10_j8r8l"]
+[ext_resource type="AudioStream" uid="uid://c4avaydnlkhuh" path="res://Assets/Sounds/switch9.ogg" id="11_j6ew7"]
+[ext_resource type="AudioStream" uid="uid://b4emeqv83hwxa" path="res://Assets/Sounds/switch10.ogg" id="12_lbk2t"]
 
 [sub_resource type="Animation" id="Animation_0oyly"]
 length = 0.001
@@ -115,6 +126,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, -0.17453292519943295, 0.08726646259971647, 0.0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClickAudioPlayerComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PlayRandom"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0oyly"]
 _data = {
@@ -155,6 +180,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, -0.08726646259971647, 0.08726646259971647, 0.0]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HoverAudioPlayerComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PlayRandom"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tibsg"]
 _data = {
@@ -172,6 +211,13 @@ libraries/ = SubResource("AnimationLibrary_0oyly")
 
 [node name="HoverAnimationPlayer" type="AnimationPlayer" parent="." unique_id=896005285]
 libraries/ = SubResource("AnimationLibrary_tibsg")
+
+[node name="HoverAudioPlayerComponent" parent="." unique_id=1917390453 instance=ExtResource("2_0oyly")]
+volume_db = -8.0
+_streams = Array[AudioStream]([ExtResource("3_epci2"), ExtResource("4_7gx8s"), ExtResource("5_7a4mn"), ExtResource("6_ovpf2"), ExtResource("7_ku6so"), ExtResource("8_ton6w"), ExtResource("9_fbp2f"), ExtResource("10_j8r8l"), ExtResource("11_j6ew7"), ExtResource("12_lbk2t")])
+
+[node name="ClickAudioPlayerComponent" parent="." unique_id=1472416313 instance=ExtResource("2_0oyly")]
+_streams = Array[AudioStream]([ExtResource("3_epci2"), ExtResource("4_7gx8s"), ExtResource("5_7a4mn"), ExtResource("6_ovpf2"), ExtResource("7_ku6so"), ExtResource("8_ton6w"), ExtResource("9_fbp2f"), ExtResource("10_j8r8l"), ExtResource("11_j6ew7"), ExtResource("12_lbk2t")])
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1300079068]
 layout_mode = 2

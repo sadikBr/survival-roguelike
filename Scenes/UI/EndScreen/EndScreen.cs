@@ -10,6 +10,8 @@ public partial class EndScreen : CanvasLayer
     private Label _subtitleLabel;
     private Button _restartButton;
     private Button _quitButton;
+    private AudioStreamPlayer _victoryAudioStreamPlayer;
+    private AudioStreamPlayer _defeatAudioStreamPlayer;
 
     public override void _Ready()
     {
@@ -25,6 +27,8 @@ public partial class EndScreen : CanvasLayer
         _subtitleLabel = GetNode<Label>("%SubtitleLabel");
         _restartButton = GetNode<Button>("%RestartButton");
         _quitButton = GetNode<Button>("%QuitButton");
+        _victoryAudioStreamPlayer = GetNode<AudioStreamPlayer>("VictoryAudioStreamPlayer");
+        _defeatAudioStreamPlayer = GetNode<AudioStreamPlayer>("DefeatAudioStreamPlayer");
 
         _restartButton.Pressed += OnRestartButtonPressed;
         _quitButton.Pressed += OnQuitButtonPressed;
@@ -34,6 +38,19 @@ public partial class EndScreen : CanvasLayer
     {
         _titleLabel.Text = "Defeat";
         _subtitleLabel.Text = "You Lost!";
+        PlayJingle(true);
+    }
+
+    public void PlayJingle(bool defeat = false)
+    {
+        if (defeat)
+        {
+            _defeatAudioStreamPlayer.Play();
+        }
+        else
+        {
+            _victoryAudioStreamPlayer.Play();
+        }
     }
 
     private void OnQuitButtonPressed()

@@ -41,6 +41,7 @@ public partial class ArenaTimeManager : Node
     {
         var endScreenInstance = _endScreenScene.Instantiate<EndScreen>();
         AddChild(endScreenInstance);
+        endScreenInstance.PlayJingle();
     }
 
 }

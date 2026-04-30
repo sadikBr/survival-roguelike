@@ -5,6 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cjmxilovr6fua" path="res://Scenes/Components/HealthComponent/HealthComponent.tscn" id="2_ev3h2"]
 [ext_resource type="PackedScene" uid="uid://c8xr05xvgcln3" path="res://Scenes/Abilities/SwordAbility/Controller/SwordAbilityController.tscn" id="2_h54ih"]
 [ext_resource type="PackedScene" uid="uid://dx0tyfmal6vp6" path="res://Scenes/Components/VelocityComponent/VelocityComponent.tscn" id="3_tgacc"]
+[ext_resource type="PackedScene" uid="uid://r4wbk0c6p1do" path="res://Scenes/Components/RandomAudioStreamPlayerComponent/RandomAudioStreamPlayerComponent.tscn" id="5_e4axn"]
+[ext_resource type="AudioStream" uid="uid://dm3gjhyg305g1" path="res://Assets/Sounds/impactMining_000.ogg" id="6_121um"]
+[ext_resource type="AudioStream" uid="uid://bkp000tgd21ge" path="res://Assets/Sounds/impactMining_001.ogg" id="7_si1fp"]
+[ext_resource type="AudioStream" uid="uid://btq12fdoqlkkf" path="res://Assets/Sounds/impactMining_002.ogg" id="8_3pesw"]
+[ext_resource type="AudioStream" uid="uid://bewjaht05gchl" path="res://Assets/Sounds/impactMining_003.ogg" id="9_rahj6"]
+[ext_resource type="AudioStream" uid="uid://bxeoyfq6mfgtf" path="res://Assets/Sounds/impactMining_004.ogg" id="10_wtluq"]
 
 [sub_resource type="Animation" id="Animation_tgacc"]
 length = 0.001
@@ -119,6 +125,9 @@ _acceleration = 25.0
 [node name="Abilities" type="Node" parent="." unique_id=1141242091]
 
 [node name="SwordAbilityController" parent="Abilities" unique_id=1642206722 instance=ExtResource("2_h54ih")]
+
+[node name="RandomAudioStreamPlayerComponent" parent="." unique_id=1702399684 instance=ExtResource("5_e4axn")]
+_streams = Array[AudioStream]([ExtResource("6_121um"), ExtResource("7_si1fp"), ExtResource("8_3pesw"), ExtResource("9_rahj6"), ExtResource("10_wtluq")])
 
 [node name="DamageIntervalTimer" type="Timer" parent="." unique_id=2103707586]
 wait_time = 0.5

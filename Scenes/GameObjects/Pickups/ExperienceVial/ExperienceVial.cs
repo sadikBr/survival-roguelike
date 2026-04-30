@@ -1,4 +1,5 @@
 using Game.Autoloads;
+using Game.Components;
 using Game.GameObjects.Entities;
 
 using Godot;
@@ -11,6 +12,7 @@ public partial class ExperienceVial : Node2D
     private Area2D _area2D;
     private CollisionShape2D _collisionShape;
     private Sprite2D _sprite;
+    private RandomAudioStreamPlayerComponent _randomAudioStreamPlayerComponent;
 
     public override void _Ready()
     {
@@ -19,6 +21,7 @@ public partial class ExperienceVial : Node2D
 
         _collisionShape = GetNode<CollisionShape2D>("%CollisionShape2D");
         _sprite = GetNode<Sprite2D>("Sprite2D");
+        _randomAudioStreamPlayerComponent = GetNode<RandomAudioStreamPlayerComponent>("RandomAudioStreamPlayerComponent");
     }
 
     private void OnAreaEntered(Area2D area)
@@ -35,6 +38,8 @@ public partial class ExperienceVial : Node2D
         tween.TweenProperty(_sprite, Node2D.PropertyName.Scale.ToString(), Vector2.Zero, 0.05f).SetDelay(0.45f);
         tween.Chain(); // this makes the tween wait for the previous animations to complete before starting the next ones.
         tween.TweenCallback(Callable.From(Collect));
+
+        _randomAudioStreamPlayerComponent.PlayRandom();
     }
 
     private void DisableCollision()

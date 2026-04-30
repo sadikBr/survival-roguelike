@@ -8,12 +8,18 @@ public partial class BasicEnemy : CharacterBody2D
 {
 
     private VelocityComponent _velocityComponent;
+    private HurtboxComponent _hurtboxComponent;
+    private RandomAudioStreamPlayerComponent _randomAudioStreamPlayerComponent;
     private Node2D _visuals;
 
     public override void _Ready()
     {
         _velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        _hurtboxComponent = GetNode<HurtboxComponent>("HurtboxComponent");
+        _randomAudioStreamPlayerComponent = GetNode<RandomAudioStreamPlayerComponent>("RandomAudioStreamPlayerComponent");
         _visuals = GetNode<Node2D>("Visuals");
+
+        _hurtboxComponent.Hit += PlayHitSound;
     }
 
     public override void _Process(double delta)
@@ -23,6 +29,11 @@ public partial class BasicEnemy : CharacterBody2D
 
         var moveSign = Mathf.Sign(Velocity.X);
         _visuals.Scale = moveSign == 0 ? Vector2.One : new Vector2(moveSign, 1);
+    }
+
+    private void PlayHitSound()
+    {
+        _randomAudioStreamPlayerComponent.PlayRandom();
     }
 
 }

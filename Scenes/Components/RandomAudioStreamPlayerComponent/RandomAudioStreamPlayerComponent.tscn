@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://r4wbk0c6p1do"]
+
+[ext_resource type="Script" uid="uid://cm8r835c748bl" path="res://Scenes/Components/RandomAudioStreamPlayerComponent/RandomAudioStreamPlayerComponent.cs" id="1_s45eu"]
+
+[node name="RandomAudioStreamPlayerComponent" type="AudioStreamPlayer2D" unique_id=1702399684]
+max_distance = 300.0
+bus = &"SFX"
+script = ExtResource("1_s45eu")

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://eaxulpxkh0ci"]
 
 [ext_resource type="Script" uid="uid://b8xcoffdcr51p" path="res://Scenes/UI/EndScreen/EndScreen.cs" id="1_7cvro"]
+[ext_resource type="AudioStream" uid="uid://dhl0e8xq70hx3" path="res://Assets/Sounds/jingles_victory.ogg" id="2_4oc5a"]
+[ext_resource type="PackedScene" uid="uid://cecni4ao4q1l7" path="res://Scenes/UI/SoundButton/SoundButton.tscn" id="2_8htbi"]
+[ext_resource type="AudioStream" uid="uid://b43y85exgrpsb" path="res://Assets/Sounds/jingles_defeat.ogg" id="3_rn6aq"]
 
 [sub_resource type="Animation" id="Animation_l6nak"]
 length = 0.001
@@ -66,6 +69,16 @@ script = ExtResource("1_7cvro")
 libraries/ = SubResource("AnimationLibrary_7cvro")
 autoplay = &"in"
 
+[node name="VictoryAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1036597017]
+stream = ExtResource("2_4oc5a")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="DefeatAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1017267515]
+stream = ExtResource("3_rn6aq")
+volume_db = -5.0
+bus = &"SFX"
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1483008160]
 anchors_preset = 15
 anchor_right = 1.0
@@ -125,12 +138,12 @@ text = "You Won!"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=580003110]
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1331264320]
+[node name="RestartButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1814104465 instance=ExtResource("2_8htbi")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=621954569]
+[node name="QuitButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=747604136 instance=ExtResource("2_8htbi")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
