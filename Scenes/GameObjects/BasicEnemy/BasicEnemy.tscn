@@ -102,20 +102,16 @@ autoplay = &"walk"
 
 [node name="HealthComponent" parent="." unique_id=2038445543 instance=ExtResource("2_3v5yd")]
 
+[node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_pb5s6")]
+_acceleration = 15.0
+
 [node name="HitFlashComponent" parent="." unique_id=1958699473 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("3_eukml")]
 _healthComponent = NodePath("../HealthComponent")
 _sprite = NodePath("../Visuals/Sprite2D")
 _hitFlashMaterial = SubResource("ShaderMaterial_xoua1")
 
-[node name="VelocityComponent" parent="." unique_id=1360372052 instance=ExtResource("3_pb5s6")]
-_acceleration = 15.0
-
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_masdr")]
 _healthComponent = NodePath("../HealthComponent")
-
-[node name="DeathComponent" parent="." unique_id=1643870301 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("4_ifawa")]
-_healthComponent = NodePath("../HealthComponent")
-_sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HurtboxComponent" parent="." unique_id=2019625298 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("4_cct7w")]
 _healthComponent = NodePath("../HealthComponent")
@@ -123,6 +119,10 @@ _healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=2130646495]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_cct7w")
+
+[node name="DeathComponent" parent="." unique_id=1643870301 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("4_ifawa")]
+_healthComponent = NodePath("../HealthComponent")
+_sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="RandomAudioStreamPlayerComponent" parent="." unique_id=1702399684 instance=ExtResource("7_17bi5")]
 _streams = Array[AudioStream]([ExtResource("8_xoua1"), ExtResource("9_36m3t"), ExtResource("10_amnoy"), ExtResource("11_h6v4j"), ExtResource("12_tk5o7")])

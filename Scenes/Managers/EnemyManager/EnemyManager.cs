@@ -10,6 +10,7 @@ public partial class EnemyManager : Node
 
     [Export] private PackedScene _basicEnemyScene;
     [Export] private PackedScene _wizardEnemyScene;
+    [Export] private PackedScene _batEnemyScene;
     [Export] private ArenaTimeManager _arenaTimeManager;
 
     private const float SpawnRadius = 375.0f;
@@ -82,6 +83,10 @@ public partial class EnemyManager : Node
         if (arenaDifficulty == 12)
         {
             _enemyTable.AddItem(_wizardEnemyScene, 20);
+        }
+        else if (arenaDifficulty == 24)
+        {
+            _enemyTable.AddItem(_batEnemyScene, 30);
         }
     }
 

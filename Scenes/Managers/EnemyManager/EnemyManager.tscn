@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://dcu0i5jseef2b" path="res://Scenes/Managers/EnemyManager/EnemyManager.cs" id="1_wbrh8"]
 [ext_resource type="PackedScene" uid="uid://dc27mhkrwnfvs" path="res://Scenes/GameObjects/BasicEnemy/BasicEnemy.tscn" id="2_6esa3"]
 [ext_resource type="PackedScene" uid="uid://bycgcmyi66atx" path="res://Scenes/GameObjects/WizardEnemy/WizardEnemy.tscn" id="3_201n6"]
+[ext_resource type="PackedScene" uid="uid://516dhdqkdeut" path="res://Scenes/GameObjects/BatEnemy/BatEnemy.tscn" id="4_kdp3c"]
 
 [node name="EnemyManager" type="Node" unique_id=730869000]
 script = ExtResource("1_wbrh8")
 _basicEnemyScene = ExtResource("2_6esa3")
 _wizardEnemyScene = ExtResource("3_201n6")
+_batEnemyScene = ExtResource("4_kdp3c")
 
 [node name="Timer" type="Timer" parent="." unique_id=910280471]
 one_shot = true
