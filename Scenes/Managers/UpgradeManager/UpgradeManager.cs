@@ -41,7 +41,6 @@ public partial class UpgradeManager : Node
         _resourcePreloader = GetNode<ResourcePreloader>("ResourcePreloader");
         _experienceManager.LevelUp += OnLevelUp;
 
-        _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AxeUpgrade), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordRateUpgrade), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordDamageUpgrade), 10);
         _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.PlayerSpeedUpgrade), 3);
@@ -101,6 +100,10 @@ public partial class UpgradeManager : Node
         {
             _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AxeDamageUpgrade), 10);
         }
+        else if (upgrade.Id == UpgradeStringNames.AnvilUpgrade)
+        {
+            // Add anvil related upgrades
+        }
     }
 
     private void OnUpgradeSelected(AbilityUpgrade upgrade)
@@ -110,9 +113,17 @@ public partial class UpgradeManager : Node
 
     private void OnArenaDifficultyIncreased(int arenaDifficulty)
     {
-        if (arenaDifficulty == 18)
+        if (arenaDifficulty == 12)
+        {
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AxeUpgrade), 10);
+        }
+        else if (arenaDifficulty == 18)
         {
             _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.SwordTargetsUpgrade), 5);
+        }
+        else if (arenaDifficulty == 28)
+        {
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AnvilUpgrade), 8);
         }
     }
 

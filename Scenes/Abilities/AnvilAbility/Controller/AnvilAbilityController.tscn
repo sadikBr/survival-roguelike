@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://krwj6cd7effn"]
+
+[ext_resource type="Script" uid="uid://dfkrtt7efrius" path="res://Scenes/Abilities/AnvilAbility/Controller/AnvilAbilityController.cs" id="1_mk1q1"]
+[ext_resource type="PackedScene" uid="uid://fmgurr8m2c18" path="res://Scenes/Abilities/AnvilAbility/AnvilAbility.tscn" id="2_t7flx"]
+
+[node name="AnvilAbilityController" type="Node" unique_id=1960890203]
+script = ExtResource("1_mk1q1")
+_anvilAbilityScene = ExtResource("2_t7flx")
+
+[node name="Timer" type="Timer" parent="." unique_id=1249738598]
+wait_time = 3.5
+autostart = true

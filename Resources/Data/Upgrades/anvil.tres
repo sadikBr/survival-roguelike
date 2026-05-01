@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://b0gevtt1gl82e"]
+
+[ext_resource type="PackedScene" uid="uid://krwj6cd7effn" path="res://Scenes/Abilities/AnvilAbility/Controller/AnvilAbilityController.tscn" id="1_md53r"]
+[ext_resource type="Script" uid="uid://cxx65g5vq2art" path="res://Resources/Upgrades/Ability.cs" id="2_toqtq"]
+
+[resource]
+script = ExtResource("2_toqtq")
+AbilityControllerScene = ExtResource("1_md53r")
+Id = "anvil"
+MaxQuantity = 1
+Name = "Anvil"
+Description = "Spawn and anvil in a random position around the player and deal massive damage"
+metadata/_custom_type_script = "uid://dka08wm1xbyqg"

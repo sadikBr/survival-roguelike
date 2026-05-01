@@ -28,7 +28,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -7)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -55,8 +55,8 @@ tracks/0/path = NodePath("Visuals/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(2.6390157, 1),
+"times": PackedFloat32Array(2.9802322e-08, 0.20000002),
+"transitions": PackedFloat32Array(2.5491211, 1),
 "update": 0,
 "values": [Vector2(0, -7), Vector2(0, -10)]
 }
@@ -67,7 +67,7 @@ tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"times": PackedFloat32Array(2.9802322e-08, 0.100000024, 0.20000002, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.17453292519943295, 0.0, -0.17453292519943295]
@@ -79,7 +79,7 @@ _data = {
 &"fly": SubResource("Animation_fl358")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ium5q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxc26"]
 resource_local_to_scene = true
 shader = ExtResource("5_y6h51")
 shader_parameter/percent = 0.0
@@ -109,7 +109,7 @@ _acceleration = 0.75
 [node name="HitFlashComponent" parent="." unique_id=1981638209 node_paths=PackedStringArray("_healthComponent", "_sprite") instance=ExtResource("4_deo3b")]
 _healthComponent = NodePath("../HealthComponent")
 _sprite = NodePath("../Visuals/Sprite2D")
-_hitFlashMaterial = SubResource("ShaderMaterial_ium5q")
+_hitFlashMaterial = SubResource("ShaderMaterial_mxc26")
 
 [node name="VialDropComponent" parent="." unique_id=1969872085 node_paths=PackedStringArray("_healthComponent") instance=ExtResource("6_y6h51")]
 _dropPercent = 0.75
@@ -136,4 +136,5 @@ shape = SubResource("CircleShape2D_ium5q")
 [node name="Visuals" type="Node2D" parent="." unique_id=1478381198]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1310695418]
+position = Vector2(0, -7)
 texture = ExtResource("6_kxdq8")

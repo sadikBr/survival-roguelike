@@ -16,13 +16,13 @@ public partial class SwordAbilityController : Node
     [Export]
     private PackedScene _swordAbility;
 
+    private Timer _timer;
+
     private const float MaxRange = 150.0f;
     private float _baseWaitTime;
     private int _numberOfTargets = 1;
     private float _baseDamage = 5.0f;
     private float _damageMultiplier = 1.0f;
-
-    private Timer _timer;
 
     public override void _Ready()
     {

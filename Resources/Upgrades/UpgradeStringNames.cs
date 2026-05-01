@@ -9,5 +9,6 @@ public class UpgradeStringNames
     public static readonly string SwordDamageUpgrade = "sword_damage";
     public static readonly string SwordRateUpgrade = "sword_rate";
     public static readonly string SwordTargetsUpgrade = "sword_targets";
+    public static readonly string AnvilUpgrade = "anvil";
 
 }
