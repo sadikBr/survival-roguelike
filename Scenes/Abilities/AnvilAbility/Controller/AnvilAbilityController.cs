@@ -1,6 +1,11 @@
+using Game.Autoloads;
 using Game.GameObjects.Entities;
+using Game.Managers;
+using Game.Resources.Upgrades;
+using Game.Upgrades;
 
 using Godot;
+using Godot.Collections;
 
 namespace Game.Abilities.Controllers;
 
@@ -11,10 +16,10 @@ public partial class AnvilAbilityController : Node
 
     private Timer _timer;
 
-    private float _minRange = 40.0f;
+    private float _minRange = 20.0f;
     private float _maxRange = 50.0f;
     private float _baseWaitTime;
-    private float _baseDamage = 15.0f;
+    private float _baseDamage = 25.0f;
     private int _numberOfAnvilsToSpawn = 1;
 
     public override void _Ready()
@@ -22,6 +27,8 @@ public partial class AnvilAbilityController : Node
         _timer = GetNode<Timer>("Timer");
         _baseWaitTime = (float)_timer.WaitTime;
         _timer.Timeout += OnTimerTimeout;
+
+        GameEvents.Instance.AbilityUpgradeAdded += OnAbilityUpgradeAdded;
     }
 
     private void OnTimerTimeout()
@@ -30,10 +37,12 @@ public partial class AnvilAbilityController : Node
 
         var distanceFromPlayer = (float)GD.RandRange(_minRange, _maxRange);
         var direction = Vector2.Right.Rotated((float)GD.RandRange(0, Mathf.Tau));
+        var additionalRotation = Mathf.Tau / _numberOfAnvilsToSpawn;
 
         for (int i = 0; i < _numberOfAnvilsToSpawn; i++)
         {
-            var spawnPosition = player.GlobalPosition + direction * distanceFromPlayer;
+            var adjustedDirection = direction.Rotated(additionalRotation * i);
+            var spawnPosition = player.GlobalPosition + adjustedDirection * distanceFromPlayer;
             var queryParams = new PhysicsRayQueryParameters2D()
             {
                 From = player.GlobalPosition,
@@ -52,6 +61,14 @@ public partial class AnvilAbilityController : Node
             foregroundLayer.AddChild(anvilInstance);
             anvilInstance.SetDamage(_baseDamage);
             anvilInstance.GlobalPosition = spawnPosition;
+        }
+    }
+
+    private void OnAbilityUpgradeAdded(AbilityUpgrade upgrade, Dictionary<string, UpgradeManager.UpgradeState> currentUpgrades)
+    {
+        if (upgrade.Id == UpgradeStringNames.AnvilCountUpgrade)
+        {
+            _numberOfAnvilsToSpawn = 1 + currentUpgrades[upgrade.Id].Quantity;
         }
     }
 }

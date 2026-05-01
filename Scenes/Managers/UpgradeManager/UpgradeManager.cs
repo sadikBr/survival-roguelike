@@ -1,5 +1,3 @@
-using System;
-
 using Game.Autoloads;
 using Game.Resources.Upgrades;
 using Game.UI;
@@ -102,7 +100,7 @@ public partial class UpgradeManager : Node
         }
         else if (upgrade.Id == UpgradeStringNames.AnvilUpgrade)
         {
-            // Add anvil related upgrades
+            _upgradePool.AddItem((AbilityUpgrade)_resourcePreloader.GetResource(UpgradeStringNames.AnvilCountUpgrade), 5);
         }
     }
 

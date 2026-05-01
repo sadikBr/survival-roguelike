@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://7b0ucgm40bne" path="res://Resources/Data/Upgrades/axe.tres" id="3_40pk6"]
 [ext_resource type="Resource" uid="uid://b0gevtt1gl82e" path="res://Resources/Data/Upgrades/anvil.tres" id="3_j0end"]
 [ext_resource type="PackedScene" uid="uid://b2lt1e71t8t75" path="res://Scenes/UI/UpgradeScreen/UpgradeScreen.tscn" id="3_oupxr"]
+[ext_resource type="Resource" uid="uid://dchdnqb32cd26" path="res://Resources/Data/Upgrades/anvil_count.tres" id="4_6scfl"]
 [ext_resource type="Resource" uid="uid://q27myctxmafj" path="res://Resources/Data/Upgrades/axe_damage.tres" id="5_0oq2c"]
 [ext_resource type="Resource" uid="uid://cgyq12e0qg8o8" path="res://Resources/Data/Upgrades/player_speed.tres" id="5_6kce5"]
 [ext_resource type="Resource" uid="uid://dewbbsw1tvn5" path="res://Resources/Data/Upgrades/sword_damage.tres" id="6_6kce5"]
@@ -15,4 +16,4 @@ script = ExtResource("1_2ucxw")
 _upgradeScreenScene = ExtResource("3_oupxr")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="." unique_id=377397987]
-resources = [PackedStringArray("anvil", "axe", "axe_damage", "player_speed", "sword_damage", "sword_rate", "sword_targets"), [ExtResource("3_j0end"), ExtResource("3_40pk6"), ExtResource("5_0oq2c"), ExtResource("5_6kce5"), ExtResource("6_6kce5"), ExtResource("2_1vwja"), ExtResource("8_fa58x")]]
+resources = [PackedStringArray("anvil", "anvil_count", "axe", "axe_damage", "player_speed", "sword_damage", "sword_rate", "sword_targets"), [ExtResource("3_j0end"), ExtResource("4_6scfl"), ExtResource("3_40pk6"), ExtResource("5_0oq2c"), ExtResource("5_6kce5"), ExtResource("6_6kce5"), ExtResource("2_1vwja"), ExtResource("8_fa58x")]]

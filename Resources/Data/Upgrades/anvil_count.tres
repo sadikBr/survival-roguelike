@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" format=3 uid="uid://dchdnqb32cd26"]
+
+[ext_resource type="Script" uid="uid://dka08wm1xbyqg" path="res://Resources/Upgrades/AbilityUpgrade.cs" id="1_gp08x"]
+
+[resource]
+script = ExtResource("1_gp08x")
+Id = "anvil_count"
+MaxQuantity = 5
+Name = "Anvil Count"
+Description = "Increase the number of spawned anvils by 1"
+metadata/_custom_type_script = "uid://dka08wm1xbyqg"
