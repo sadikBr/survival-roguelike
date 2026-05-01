@@ -8,5 +8,5 @@ script = ExtResource("1_mk1q1")
 _anvilAbilityScene = ExtResource("2_t7flx")
 
 [node name="Timer" type="Timer" parent="." unique_id=1249738598]
-wait_time = 3.5
+wait_time = 5.0
 autostart = true

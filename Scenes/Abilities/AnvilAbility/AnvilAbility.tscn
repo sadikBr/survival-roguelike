@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dynd2wmjrwqeu" path="res://Scenes/Components/HitboxComponent/HitboxComponent.tscn" id="1_bftt2"]
 [ext_resource type="Script" uid="uid://b1nicptbg62e1" path="res://Scenes/Abilities/AnvilAbility/AnvilAbility.cs" id="1_fjf0q"]
 [ext_resource type="Texture2D" uid="uid://biv5doie1qunk" path="res://Scenes/Abilities/AnvilAbility/anvil.png" id="2_fjf0q"]
+[ext_resource type="Texture2D" uid="uid://bxd8nmxl23pb8" path="res://Assets/Particles/particle.png" id="4_kwr4q"]
 
 [sub_resource type="Animation" id="Animation_fjf0q"]
 length = 0.001
@@ -53,6 +54,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_bftt2"]
@@ -121,6 +134,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjf0q"]
 _data = {
@@ -130,6 +155,25 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kwr4q"]
 radius = 37.01351
+
+[sub_resource type="Curve" id="Curve_kwr4q"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8527608, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.20000005), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qa448"]
+curve = SubResource("Curve_kwr4q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qa448"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 40.0
+damping_max = 50.000004
+scale_curve = SubResource("CurveTexture_qa448")
 
 [node name="AnvilAbility" type="Node2D" unique_id=1454477479]
 script = ExtResource("1_fjf0q")
@@ -143,6 +187,17 @@ autoplay = &"default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1362108544]
 shape = SubResource("CircleShape2D_kwr4q")
 disabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=628132353]
+emitting = false
+amount = 24
+texture = ExtResource("4_kwr4q")
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.75
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_qa448")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=311810719]
 texture = ExtResource("2_fjf0q")
