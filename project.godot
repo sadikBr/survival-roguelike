@@ -57,6 +57,7 @@ Enemy=""
 EntitiesLayer=""
 ForegroundLayer=""
 UpgradeCard=""
+MetaUpgradeCard=""
 
 [gui]
 

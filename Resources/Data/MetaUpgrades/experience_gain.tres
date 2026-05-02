@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_8tyqn")
 Id = "experience _gain"
+ExperienceCost = 100
 Title = "Experience Drop Rate"
 Description = "Increases the experience drop chance by 10%"
 metadata/_custom_type_script = "uid://dew6wxrgw0xxp"

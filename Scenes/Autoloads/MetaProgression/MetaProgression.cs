@@ -10,7 +10,7 @@ public partial class MetaProgression : Node
     private const string SaveFilePath = "user://meta_progression.tres";
     public static MetaProgression Instance { get; private set; }
 
-    private SaveData _saveData;
+    public SaveData SaveData { get; private set; }
 
     public override void _Notification(int what)
     {
@@ -22,15 +22,15 @@ public partial class MetaProgression : Node
 
     public override void _Ready()
     {
-        _saveData = LoadSaveData();
+        SaveData = LoadSaveData();
         GameEvents.Instance.ExperienceVialCollected += OnExperieceVialCollected;
     }
 
     public void AddMetaUpgrade(MetaUpgrade metaUpgrade)
     {
-        if (!_saveData.CurrentMetaUpgrades.TryGetValue(metaUpgrade.Id, out var data))
+        if (!SaveData.CurrentMetaUpgrades.TryGetValue(metaUpgrade.Id, out var data))
         {
-            _saveData.CurrentMetaUpgrades.Add(metaUpgrade.Id, new MetaUpgradeState
+            SaveData.CurrentMetaUpgrades.Add(metaUpgrade.Id, new MetaUpgradeState
             {
                 MetaUpgrade = metaUpgrade,
                 Quantity = 1
@@ -39,13 +39,15 @@ public partial class MetaProgression : Node
         else
         {
             data.Quantity += 1;
-            _saveData.CurrentMetaUpgrades[metaUpgrade.Id] = data;
+            SaveData.CurrentMetaUpgrades[metaUpgrade.Id] = data;
         }
+        SaveData.MetaUpgradeCurrency -= metaUpgrade.ExperienceCost;
+        Save();
     }
 
     public void Save()
     {
-        ResourceSaver.Save(_saveData, SaveFilePath);
+        ResourceSaver.Save(SaveData, SaveFilePath);
     }
 
     private SaveData LoadSaveData()
@@ -68,6 +70,6 @@ public partial class MetaProgression : Node
 
     private void OnExperieceVialCollected(int amount)
     {
-        _saveData.MetaUpgradeCurrency += amount;
+        SaveData.MetaUpgradeCurrency += amount;
     }
 }
