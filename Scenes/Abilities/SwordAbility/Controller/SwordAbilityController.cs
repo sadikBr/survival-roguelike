@@ -86,4 +86,9 @@ public partial class SwordAbilityController : Node
         }
     }
 
+    public override void _ExitTree()
+    {
+        GameEvents.Instance.AbilityUpgradeAdded -= OnAbilityUpgradeAdded;
+    }
+
 }

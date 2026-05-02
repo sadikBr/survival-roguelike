@@ -14,6 +14,7 @@ public partial class MetaUpgradeCard : PanelContainer
     private Label _descriptionLabel;
     private AnimationPlayer _animationPlayer;
     private Label _costLabel;
+    private Label _upgradeCount;
     private ProgressBar _costProgress;
     private Button _purchaseButton;
 
@@ -25,6 +26,7 @@ public partial class MetaUpgradeCard : PanelContainer
         _descriptionLabel = GetNode<Label>("%DescriptionLabel");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _costLabel = GetNode<Label>("%CostLabel");
+        _upgradeCount = GetNode<Label>("%UpgradeCount");
         _costProgress = GetNode<ProgressBar>("%CostProgress");
         _purchaseButton = GetNode<Button>("%PurchaseButton");
 
@@ -45,10 +47,15 @@ public partial class MetaUpgradeCard : PanelContainer
         var target = _upgrade.ExperienceCost;
         var percent = Mathf.Min((float)currentProgress / target, 1.0f);
 
+        var upgradeCount = MetaProgression.Instance.GetMetaUpgradeCount(_upgrade.Id);
+        var isMaxed = upgradeCount >= _upgrade.MaxQuantity;
+
         _costLabel.Text = $"{Mathf.Min(currentProgress, target)}/{target}";
+        _upgradeCount.Text = $"x{upgradeCount}";
         _costProgress.Value = percent;
 
-        _purchaseButton.Disabled = percent < 1.0f;
+        _purchaseButton.Disabled = percent < 1.0f || isMaxed;
+        _purchaseButton.Text = isMaxed ? "Maxed" : "Purchase";
     }
 
     private void OnPurchaseButtonPressed()

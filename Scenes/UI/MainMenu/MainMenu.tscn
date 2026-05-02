@@ -48,7 +48,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
 
-[node name="OptionsButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1094291996 instance=ExtResource("3_ehq06")]
+[node name="UpgradesButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1094291996 instance=ExtResource("3_ehq06")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrades"
+
+[node name="OptionsButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=776910522 instance=ExtResource("3_ehq06")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Options"

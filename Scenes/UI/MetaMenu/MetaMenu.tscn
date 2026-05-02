@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dupyaw5dip32g" path="res://Scenes/UI/MetaUpgradeCard/MetaUpgradeCard.tscn" id="3_5gs2w"]
 [ext_resource type="PackedScene" uid="uid://urqpavln4xqf" path="res://Scenes/UI/Vignette/Vignette.tscn" id="3_7t20d"]
 [ext_resource type="Resource" uid="uid://cgdgimm26a3vg" path="res://Resources/Data/MetaUpgrades/experience_gain.tres" id="3_bgasy"]
+[ext_resource type="PackedScene" uid="uid://cecni4ao4q1l7" path="res://Scenes/UI/SoundButton/SoundButton.tscn" id="5_bgasy"]
 
 [node name="MetaMenu" type="CanvasLayer" unique_id=635475600]
 layer = 2
@@ -32,7 +33,15 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 24
-columns = 3
+columns = 2
+
+[node name="BackButton" parent="MarginContainer" unique_id=1814104465 instance=ExtResource("5_bgasy")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
 
 [node name="Vignette" parent="." unique_id=1420521353 instance=ExtResource("3_7t20d")]
 layer = 3

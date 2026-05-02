@@ -27,6 +27,13 @@ public partial class ScreenTransition : CanvasLayer
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
+    public async void TransitionToScene(string scenePath)
+    {
+        Instance.Transition();
+        await ToSignal(Instance, SignalName.TransitionedHalfway);
+        GetTree().ChangeSceneToFile(scenePath);
+    }
+
     public async void Transition()
     {
         _animationPlayer.Play(DefaultAnimation);

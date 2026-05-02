@@ -45,6 +45,11 @@ public partial class MetaProgression : Node
         Save();
     }
 
+    public int GetMetaUpgradeCount(string id)
+    {
+        return SaveData.CurrentMetaUpgrades.TryGetValue(id, out var data) ? data.Quantity : 0;
+    }
+
     public void Save()
     {
         ResourceSaver.Save(SaveData, SaveFilePath);

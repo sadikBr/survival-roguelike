@@ -42,4 +42,9 @@ public partial class ExperienceManager : Node
         IncrementExperience(amount);
     }
 
+    public override void _ExitTree()
+    {
+        GameEvents.Instance.ExperienceVialCollected -= OnExperienceVialCollected;
+    }
+
 }

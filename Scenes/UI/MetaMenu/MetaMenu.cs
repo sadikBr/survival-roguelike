@@ -1,3 +1,4 @@
+using Game.Autoloads;
 using Game.Resources.MetaUpgrades;
 
 using Godot;
@@ -11,10 +12,13 @@ public partial class MetaMenu : CanvasLayer
     [Export] private MetaUpgrade[] _upgrades;
 
     private GridContainer _container;
+    private Button _backButton;
 
     public override void _Ready()
     {
         _container = GetNode<GridContainer>("%GridContainer");
+        _backButton = GetNode<Button>("%BackButton");
+        _backButton.Pressed += OnBackButtonPressed;
 
         foreach (var upgrade in _upgrades)
         {
@@ -24,6 +28,9 @@ public partial class MetaMenu : CanvasLayer
         }
     }
 
-
+    private async void OnBackButtonPressed()
+    {
+        ScreenTransition.Instance.TransitionToScene("res://Scenes/UI/MainMenu/MainMenu.tscn");
+    }
 
 }

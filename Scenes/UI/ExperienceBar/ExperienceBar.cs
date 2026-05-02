@@ -24,4 +24,5 @@ public partial class ExperienceBar : CanvasLayer
         var progress = (float)currentExp / targetExp;
         _progressBar.Value = progress;
     }
+
 }

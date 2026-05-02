@@ -10,8 +10,8 @@ public partial class EndScreen : CanvasLayer
     private PanelContainer _panelContainer;
     private Label _titleLabel;
     private Label _subtitleLabel;
-    private Button _restartButton;
-    private Button _quitButton;
+    private Button _continueButton;
+    private Button _quitToMenuButton;
     private AudioStreamPlayer _victoryAudioStreamPlayer;
     private AudioStreamPlayer _defeatAudioStreamPlayer;
 
@@ -27,13 +27,13 @@ public partial class EndScreen : CanvasLayer
         GetTree().Paused = true;
         _titleLabel = GetNode<Label>("%TitleLabel");
         _subtitleLabel = GetNode<Label>("%SubtitleLabel");
-        _restartButton = GetNode<Button>("%RestartButton");
-        _quitButton = GetNode<Button>("%QuitButton");
+        _continueButton = GetNode<Button>("%ContinueButton");
+        _quitToMenuButton = GetNode<Button>("%QuitToMenuButton");
         _victoryAudioStreamPlayer = GetNode<AudioStreamPlayer>("VictoryAudioStreamPlayer");
         _defeatAudioStreamPlayer = GetNode<AudioStreamPlayer>("DefeatAudioStreamPlayer");
 
-        _restartButton.Pressed += OnRestartButtonPressed;
-        _quitButton.Pressed += OnQuitButtonPressed;
+        _continueButton.Pressed += OnContinueButtonPressed;
+        _quitToMenuButton.Pressed += OnQuitToMenuButtonPressed;
     }
 
     public void SetDefeat()
@@ -55,16 +55,20 @@ public partial class EndScreen : CanvasLayer
         }
     }
 
-    private void OnQuitButtonPressed()
+    private async void OnQuitToMenuButtonPressed()
     {
-        GetTree().Quit();
+
+        ScreenTransition.Instance.Transition();
+        await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
+        GetTree().Paused = false;
+        GetTree().ChangeSceneToFile("res://Scenes/UI/MainMenu/MainMenu.tscn");
     }
 
-    private async void OnRestartButtonPressed()
+    private async void OnContinueButtonPressed()
     {
         ScreenTransition.Instance.Transition();
         await ToSignal(ScreenTransition.Instance, ScreenTransition.SignalName.TransitionedHalfway);
         GetTree().Paused = false;
-        GetTree().ChangeSceneToFile("res://Scenes/Main/Main.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/UI/MetaMenu/MetaMenu.tscn");
     }
 }

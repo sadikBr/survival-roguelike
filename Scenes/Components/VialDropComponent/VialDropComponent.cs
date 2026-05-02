@@ -1,3 +1,6 @@
+using Game.Autoloads;
+using Game.MetaUpgrades;
+
 using Godot;
 
 namespace Game.Components;
@@ -16,7 +19,16 @@ public partial class VialDropComponent : Node
 
     private void OnDied()
     {
-        if (GD.Randf() > _dropPercent) return;
+        var adjustedDropPercent = _dropPercent;
+
+        var upgradeCount = MetaProgression.Instance.GetMetaUpgradeCount(MetaUpgradeStringNames.ExperienceGain);
+        GD.Print(upgradeCount);
+        if (upgradeCount > 0)
+        {
+            adjustedDropPercent += upgradeCount * 0.1f;
+        }
+
+        if (GD.Randf() > adjustedDropPercent) return;
 
         if (_vialScene == null) return;
 

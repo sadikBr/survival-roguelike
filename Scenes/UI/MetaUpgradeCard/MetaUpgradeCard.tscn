@@ -169,13 +169,23 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -1
 
-[node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=675912012]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=657313968]
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=675912012]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"BlueOutlineLabel"
 text = "50/200"
 horizontal_alignment = 2
+
+[node name="UpgradeCount" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=84900298]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"BlueOutlineLabel"
+text = "x0"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1338289832]
 layout_mode = 2
