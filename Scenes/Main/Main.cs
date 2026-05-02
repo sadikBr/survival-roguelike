@@ -1,3 +1,4 @@
+using Game.Autoloads;
 using Game.GameObjects.Entities;
 using Game.UI;
 
@@ -36,5 +37,6 @@ public partial class Main : Node
         var endScreenInstance = _endScreenScene.Instantiate<EndScreen>();
         AddChild(endScreenInstance);
         endScreenInstance.SetDefeat();
+        MetaProgression.Instance.Save();
     }
 }

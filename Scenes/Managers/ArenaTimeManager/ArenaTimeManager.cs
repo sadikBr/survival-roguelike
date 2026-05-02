@@ -1,3 +1,4 @@
+using Game.Autoloads;
 using Game.UI;
 
 using Godot;
@@ -42,6 +43,7 @@ public partial class ArenaTimeManager : Node
         var endScreenInstance = _endScreenScene.Instantiate<EndScreen>();
         AddChild(endScreenInstance);
         endScreenInstance.PlayJingle();
+        MetaProgression.Instance.Save();
     }
 
 }
