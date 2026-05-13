@@ -1,3 +1,5 @@
+using Game.Autoloads;
+
 using Godot;
 
 namespace Game.Components;
@@ -35,5 +37,7 @@ public partial class DeathComponent : Node2D
 
         _animationPlayer.Play(AnimationPlayerDefault);
         _randomAudioStreamPlayerComponent.PlayRandom();
+
+        GameEvents.Instance.EmitEnemyKilled();
     }
 }

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MetaUpgrade" format=3 uid="uid://c3ycxea6ykvyh"]
+
+[ext_resource type="Script" uid="uid://dew6wxrgw0xxp" path="res://Resources/MetaUpgrades/MetaUpgrade.cs" id="1_yblo5"]
+
+[resource]
+script = ExtResource("1_yblo5")
+Id = "health_regeneration"
+ExperienceCost = 250
+Title = "Health Regeneration"
+Description = "On enemy kill you have 35% chance to regenerate 1 hp"
+metadata/_custom_type_script = "uid://dew6wxrgw0xxp"

@@ -1,8 +1,7 @@
-using System;
-
 using Game.Autoloads;
 using Game.Components;
 using Game.Managers;
+using Game.MetaUpgrades;
 using Game.Resources.Upgrades;
 using Game.Upgrades;
 
@@ -57,7 +56,9 @@ public partial class Player : CharacterBody2D
 
         _abilities = GetNode<Node>("Abilities");
         _randomAudioStreamPlayerComponent = GetNode<RandomAudioStreamPlayerComponent>("RandomAudioStreamPlayerComponent");
+
         GameEvents.Instance.AbilityUpgradeAdded += OnAbilityUpgradeAdded;
+        GameEvents.Instance.EnemyKilled += OnEnemyKilled;
     }
 
     public override void _Process(double delta)
@@ -133,6 +134,19 @@ public partial class Player : CharacterBody2D
         {
             var newMaxSpeed = _baseSpeed + _baseSpeed * currentUpgrades[upgrade.Id].Quantity * 0.25f;
             _velocityComponent.UpdateMaxSpeed(newMaxSpeed);
+        }
+    }
+
+    private void OnEnemyKilled()
+    {
+        var hasHealthRegeneration = MetaProgression.Instance.GetMetaUpgradeCount(MetaUpgradeStringNames.HealthRegeneration) > 0;
+        if (hasHealthRegeneration)
+        {
+            var percent = GD.Randf();
+            if (percent <= .35)
+            {
+                _healthComponent.Heal(1.0f);
+            }
         }
     }
 

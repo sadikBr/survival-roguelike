@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MetaUpgrade" format=3 uid="uid://c67q4tlmltyh2"]
+
+[ext_resource type="Script" uid="uid://dew6wxrgw0xxp" path="res://Resources/MetaUpgrades/MetaUpgrade.cs" id="1_usjuk"]
+
+[resource]
+script = ExtResource("1_usjuk")
+Id = "super_experience_gain"
+ExperienceCost = 5000
+Title = "Guaranteed Experience"
+Description = "Make the experience drop guaranteed"
+metadata/_custom_type_script = "uid://dew6wxrgw0xxp"

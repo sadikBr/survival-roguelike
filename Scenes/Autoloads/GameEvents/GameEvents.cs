@@ -12,6 +12,7 @@ public partial class GameEvents : Node
     [Signal] public delegate void ExperienceVialCollectedEventHandler(int amount);
     [Signal] public delegate void AbilityUpgradeAddedEventHandler(AbilityUpgrade upgrade, Dictionary<string, UpgradeState> currentUpgrades);
     [Signal] public delegate void PlayerDamagedEventHandler();
+    [Signal] public delegate void EnemyKilledEventHandler();
 
     public static GameEvents Instance { get; private set; }
 
@@ -37,4 +38,10 @@ public partial class GameEvents : Node
     {
         EmitSignal(SignalName.PlayerDamaged);
     }
+
+    public void EmitEnemyKilled()
+    {
+        EmitSignal(SignalName.EnemyKilled);
+    }
+
 }

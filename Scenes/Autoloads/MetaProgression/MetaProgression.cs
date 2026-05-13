@@ -66,13 +66,6 @@ public partial class MetaProgression : Node
         return saveData;
     }
 
-    // private void PrintAsJson(SaveData input)
-    // {
-    //     var options = new JsonSerializerOptions { WriteIndented = true, IgnoreReadOnlyProperties = true };
-    //     var json = JsonSerializer.Serialize(input, options);
-    //     GD.Print(json);
-    // }
-
     private void OnExperieceVialCollected(int amount)
     {
         SaveData.MetaUpgradeCurrency += amount;

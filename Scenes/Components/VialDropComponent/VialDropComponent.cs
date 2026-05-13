@@ -21,11 +21,18 @@ public partial class VialDropComponent : Node
     {
         var adjustedDropPercent = _dropPercent;
 
-        var upgradeCount = MetaProgression.Instance.GetMetaUpgradeCount(MetaUpgradeStringNames.ExperienceGain);
-        GD.Print(upgradeCount);
-        if (upgradeCount > 0)
+        var guaranteedDrop = MetaProgression.Instance.GetMetaUpgradeCount(MetaUpgradeStringNames.SuperExperienceGain);
+        if (guaranteedDrop > 0)
         {
-            adjustedDropPercent += upgradeCount * 0.1f;
+            adjustedDropPercent = 1f;
+        }
+        else
+        {
+            var upgradeCount = MetaProgression.Instance.GetMetaUpgradeCount(MetaUpgradeStringNames.ExperienceGain);
+            if (upgradeCount > 0)
+            {
+                adjustedDropPercent += upgradeCount * 0.1f;
+            }
         }
 
         if (GD.Randf() > adjustedDropPercent) return;
